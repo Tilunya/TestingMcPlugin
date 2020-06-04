@@ -1,0 +1,9 @@
+   main: com.tilundev.testingplugin.Main
+   name: TestingPlugin
+   version: 0.1
+   author: TilunDev
+   description: A Testing plugin for training purpose
+   commands:
+      kit:
+         description: Give 64 Diamonds
+         usage: /<command>
