@@ -17,6 +17,8 @@ public class TimerPlayer {
 		Objective obj = _board.registerNewObjective("Testing Server", "dummy", "Testing Plugin");
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 		_score = obj.getScore("Compteur : ");
+		Score score2 = obj.getScore("Lul"); // GetScore pour set un score GG WP
+		score2.setScore(0);
 		_score.setScore(_nbConnect);
 	}
 	
