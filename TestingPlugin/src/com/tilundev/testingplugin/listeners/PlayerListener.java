@@ -10,7 +10,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
-import com.tilundev.testingplugin.timer.TimerPlayer;
 
 public class PlayerListener implements Listener {
 	
