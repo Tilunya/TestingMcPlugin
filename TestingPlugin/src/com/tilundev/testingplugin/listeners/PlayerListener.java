@@ -1,5 +1,8 @@
 package com.tilundev.testingplugin.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,14 +19,26 @@ public class PlayerListener implements Listener {
 		event.getPlayer().setScoreboard(ScoreboardObjectives.getScoreboard());
 	}
 	
+	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent block) {
-		if (block.getBlock().getType() == Material.ACACIA_LOG || 
-				block.getBlock().getType() == Material.BIRCH_LOG || 
-				block.getBlock().getType() == Material.DARK_OAK_LOG || 
-				block.getBlock().getType() == Material.JUNGLE_LOG || 
-				block.getBlock().getType() == Material.OAK_LOG || 
-				block.getBlock().getType() == Material.SPRUCE_LOG ) {
+		// Search for a better method
+		List<Material> logs = new ArrayList<>();
+		logs.add(Material.ACACIA_LOG);
+		logs.add(Material.BIRCH_LOG);
+		logs.add(Material.DARK_OAK_LOG);
+		logs.add(Material.JUNGLE_LOG);
+		logs.add(Material.OAK_LOG);
+		logs.add(Material.SPRUCE_LOG);
+		logs.add(Material.STRIPPED_ACACIA_LOG);
+		logs.add(Material.STRIPPED_BIRCH_LOG);
+		logs.add(Material.STRIPPED_DARK_OAK_LOG);
+		logs.add(Material.STRIPPED_JUNGLE_LOG);
+		logs.add(Material.STRIPPED_OAK_LOG);
+		logs.add(Material.STRIPPED_SPRUCE_LOG);
+		
+		
+		if (logs.contains(block.getBlock().getType())) {
 			ScoreboardObjectives.addScore(0);
 		} 
 		else if (block.getBlock().getType() == Material.STONE) {

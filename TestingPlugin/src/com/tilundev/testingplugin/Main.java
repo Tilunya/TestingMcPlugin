@@ -23,7 +23,6 @@ public class Main extends JavaPlugin {
 
 		InitializerListener.init(this);
 		ScoreboardObjectives.initQuest();
-		TimerPlayer.setScoreBoard();
 	}
 
 	@Override

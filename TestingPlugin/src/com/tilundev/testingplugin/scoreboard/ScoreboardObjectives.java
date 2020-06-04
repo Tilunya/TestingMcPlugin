@@ -14,7 +14,7 @@ import org.bukkit.scoreboard.Scoreboard;
 public class ScoreboardObjectives {
 
 	private static Scoreboard _boardobjective = Bukkit.getScoreboardManager().getNewScoreboard();
-	private static Map<Objective, List<Score>> _objectives = new HashMap<Objective, List<Score>>();
+	private static Map<Objective, List<Score>> _objectives = new HashMap<Objective, List<Score>>(); // Maybe Useless
 
 	
 	public static Scoreboard getScoreboard() {
