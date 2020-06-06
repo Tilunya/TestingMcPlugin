@@ -36,7 +36,6 @@ public class PlayerListener implements Listener {
 		logs.add(Material.STRIPPED_OAK_LOG);
 		logs.add(Material.STRIPPED_SPRUCE_LOG);
 		
-		
 		if (logs.contains(block.getBlock().getType())) {
 			ScoreboardObjectives.addScore(0);
 		} 
