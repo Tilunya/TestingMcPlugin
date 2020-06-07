@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,12 +12,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
+import com.tilundev.testingplugin.listeners.functional.PlayerEvent;
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
 
 public class PlayerListener implements Listener {
+	
+	//TODO : Those two variables can be moved into a configuration file.
+	private int maxHightBeforeInjury = 5;
+	private int maxDamageBeforeInjury = 5;
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -55,30 +57,24 @@ public class PlayerListener implements Listener {
 	}
 	
 	/**
-	 * Whenever player lose health after falling from a high place, he gets a broken leg.
-	 * After losing at least 5 hearts from a fall, the player will gets a permanent slow effect.
+	 * Event when player fall from a high place.
 	 * @param entityDamaged
 	 */
 	@EventHandler
 	public void onPlayerFall(EntityDamageEvent entityDamaged) {
-		LivingEntity player = (LivingEntity) entityDamaged.getEntity();
-		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > 5) {
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 0));
-			//add "broken leg" to the status scoreboard of the player.
+		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > maxHightBeforeInjury) {
+			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
 		}
 	}
 	
 	/**
-	 * Whenever player lose a high amount of health from a hit, he gets a broken harm.
-	 * After losing at least 5 hearts from a hit, the player will gets a permanent mining fatigue effect.
+	 * Event when player gets a violent hit.
 	 * @param entityHit
 	 */
 	@EventHandler
 	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
-		LivingEntity player = (LivingEntity) entityHit.getEntity();
-		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > 5){
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 0));
-			//add "broken harm" to the status scoreboard of the player.
+		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > maxDamageBeforeInjury){
+			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
 		}
 	}
 	
