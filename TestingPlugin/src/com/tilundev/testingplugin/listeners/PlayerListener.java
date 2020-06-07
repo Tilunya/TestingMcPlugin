@@ -3,11 +3,15 @@ package com.tilundev.testingplugin.listeners;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionType;
 
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
 
@@ -47,6 +51,15 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
+	@EventHandler
+	public void onPlayerItemConsume(PlayerItemConsumeEvent pic) {
+		if(pic.getItem().getType().equals(Material.POTION)) {
+			PotionMeta potionMeta = (PotionMeta) pic.getItem().getItemMeta();
+			if(potionMeta.getBasePotionData().getType().equals(PotionType.WATER)) {
+				Bukkit.broadcastMessage("Oh regarder cet homme qui a bu de l'eau. Quel homme réhydraté!");
+			}
+		}
+	}
 	
 
 }
