@@ -11,6 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.tilundev.testingplugin.listeners.functional.PlayerEvent;
@@ -21,6 +22,7 @@ public class PlayerListener implements Listener {
 	//TODO : Those two variables can be moved into a configuration file.
 	private int maxHightBeforeInjury = 5;
 	private int maxDamageBeforeInjury = 5;
+	private Material bandage = Material.BREAD;
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -78,5 +80,14 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
-
+	/**
+	 * Event when player use a bandage (consumable item) for healing purpose.
+	 * @param consumeItem
+	 */
+	@EventHandler
+	public void onPlayerHealing(PlayerItemConsumeEvent consumeItem) {
+		if(consumeItem.getItem().getType().equals(bandage)) {
+			PlayerEvent.playerHealingInjuries((LivingEntity) consumeItem.getPlayer());
+		}
+	}
 }
