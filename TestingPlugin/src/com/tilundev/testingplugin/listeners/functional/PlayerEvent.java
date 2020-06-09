@@ -25,4 +25,17 @@ public class PlayerEvent {
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 0));
 		//TODO : add "broken harm" to the status scoreboard of the player.
 	}
+	
+	/**
+	 * Remove slow and slow mining effect corresponding to broken harm and leg.
+	 * @param player
+	 */
+	public static void playerHealingInjuries(LivingEntity player) {
+		for (PotionEffect effect : player.getActivePotionEffects()) {
+			if(effect.getType().equals(PotionEffectType.SLOW) || effect.getType().equals(PotionEffectType.SLOW_DIGGING)) {
+				player.removePotionEffect(effect.getType());
+				//TODO : remove "broken leg" and "broken harm" to the status scoreboard of the player.
+			}
+        }
+	}
 }
