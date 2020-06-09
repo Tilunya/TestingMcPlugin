@@ -4,14 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.tilundev.testingplugin.listeners.functional.PlayerEvent;
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
 
 public class PlayerListener implements Listener {
+	
+	//TODO : Those two variables can be moved into a configuration file.
+	private int maxHightBeforeInjury = 5;
+	private int maxDamageBeforeInjury = 5;
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -47,6 +56,27 @@ public class PlayerListener implements Listener {
 		}
 	}
 	
+	/**
+	 * Event when player fall from a high place.
+	 * @param entityDamaged
+	 */
+	@EventHandler
+	public void onPlayerFall(EntityDamageEvent entityDamaged) {
+		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > maxHightBeforeInjury) {
+			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
+		}
+	}
+	
+	/**
+	 * Event when player gets a violent hit.
+	 * @param entityHit
+	 */
+	@EventHandler
+	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
+		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > maxDamageBeforeInjury){
+			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
+		}
+	}
 	
 
 }
