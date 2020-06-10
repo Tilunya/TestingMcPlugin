@@ -5,21 +5,37 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import com.tilundev.testingplugin.data.PersistData;
+import com.tilundev.testingplugin.data.PlayerData;
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
+import com.tilundev.testingplugin.scoreboard.StateScoreboard;
 
 public class PlayerListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		event.getPlayer().setScoreboard(ScoreboardObjectives.getScoreboard());
+		Player player = event.getPlayer();
+		PlayerData playerData = PersistData.addPersistantPlayer(player);
+		StateScoreboard.initState(playerData);
+	}
+
+	@EventHandler
+	public void onPlayerQuitEvent(PlayerQuitEvent pqe) {
+		Player player = pqe.getPlayer();
+		PersistData.removePersistantPlayer(player);
 	}
 	
 	
@@ -56,7 +72,24 @@ public class PlayerListener implements Listener {
 		if(pic.getItem().getType().equals(Material.POTION)) {
 			PotionMeta potionMeta = (PotionMeta) pic.getItem().getItemMeta();
 			if(potionMeta.getBasePotionData().getType().equals(PotionType.WATER)) {
-				Bukkit.broadcastMessage("Oh regarder cet homme qui a bu de l'eau. Quel homme réhydraté!");
+				PlayerData playerData = PersistData.getPlayerData(pic.getPlayer());
+				if(playerData != null) {
+					playerData.get_state().drinkClearWater();
+					StateScoreboard.updateScoreboard(playerData);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onFoodLevelChange(FoodLevelChangeEvent flc) {
+		if(flc.getEntityType().equals(EntityType.PLAYER)) {
+			Player player = (Player) flc.getEntity();
+			PlayerData playerData = PersistData.getPlayerData(player);
+			playerData.get_state().lostHydration();
+			StateScoreboard.updateScoreboard(playerData);
+			if(Double.compare(playerData.get_state().get_hydration(),25.0) < 0) {
+				
 			}
 		}
 	}

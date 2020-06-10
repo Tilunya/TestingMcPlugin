@@ -1,4 +1,4 @@
-package com.tilundev.testingplugin.listeners.functional;
+package com.tilundev.testingplugin.listeners.event;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
