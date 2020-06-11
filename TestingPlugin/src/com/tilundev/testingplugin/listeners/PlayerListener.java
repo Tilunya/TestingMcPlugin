@@ -11,9 +11,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -74,7 +76,7 @@ public class PlayerListener implements Listener {
 			if(potionMeta.getBasePotionData().getType().equals(PotionType.WATER)) {
 				PlayerData playerData = PersistData.getPlayerData(pic.getPlayer());
 				if(playerData != null) {
-					playerData.get_state().drinkClearWater();
+					playerData.get_state().drinkClearWater(playerData);
 					StateScoreboard.updateScoreboard(playerData);
 				}
 			}
@@ -86,13 +88,19 @@ public class PlayerListener implements Listener {
 		if(flc.getEntityType().equals(EntityType.PLAYER)) {
 			Player player = (Player) flc.getEntity();
 			PlayerData playerData = PersistData.getPlayerData(player);
-			playerData.get_state().lostHydration();
+			playerData.get_state().lostHydration(playerData);
 			StateScoreboard.updateScoreboard(playerData);
-			if(Double.compare(playerData.get_state().get_hydration(),25.0) < 0) {
-				
-			}
+			
 		}
 	}
 	
+	@EventHandler
+	public void onPlayerRespawn(PlayerRespawnEvent pre) { // Do this on resurect
+		PlayerData playerData = PersistData.getPlayerData(pre.getPlayer());
+		playerData.get_state().initStatePlayer();
+		playerData.get_player().setWalkSpeed(PlayerData.DEFAULT_WALKING_SPEED);
+		StateScoreboard.updateScoreboard(playerData);
+		
+	}
 
 }

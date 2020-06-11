@@ -7,6 +7,8 @@ public class PlayerData {
 	private Player _player;
 	private StatePlayerData _state;
 	
+	public static final float DEFAULT_WALKING_SPEED = 0.2f;
+	
 	// ---- GETTER ----
 	public Player get_player() {
 		return _player;

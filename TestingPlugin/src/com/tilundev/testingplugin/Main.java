@@ -35,7 +35,7 @@ public class Main extends JavaPlugin {
 		TimerPlayer timerHydrationPlayer = new TimerPlayer();
 		timerHydrationPlayer.runTaskTimer(this, 20, 20);
 		TimerLostStatusPlayer lostStatusPlayerTimer = new TimerLostStatusPlayer();
-		lostStatusPlayerTimer.runTaskTimer(this, 400, 400);
+		lostStatusPlayerTimer.runTaskTimer(this, 5, 5);
 		
 	}
 
