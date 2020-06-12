@@ -7,11 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -22,10 +29,16 @@ import org.bukkit.potion.PotionType;
 
 import com.tilundev.testingplugin.data.PersistData;
 import com.tilundev.testingplugin.data.PlayerData;
+import com.tilundev.testingplugin.listeners.functional.PlayerEvent;
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
 import com.tilundev.testingplugin.scoreboard.StateScoreboard;
 
 public class PlayerListener implements Listener {
+	
+	//TODO : Those two variables can be moved into a configuration file.
+	private int maxHightBeforeInjury = 5;
+	private int maxDamageBeforeInjury = 5;
+	private Material bandage = Material.BREAD;
 	
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -82,6 +95,16 @@ public class PlayerListener implements Listener {
 			}
 		}
 	}
+	/**
+	 * Event when player fall from a high place.
+	 * @param entityDamaged
+	 */
+	@EventHandler
+	public void onPlayerFall(EntityDamageEvent entityDamaged) {
+		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > maxHightBeforeInjury) {
+			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
+		}
+	}
 	
 	@EventHandler
 	public void onFoodLevelChange(FoodLevelChangeEvent flc) {
@@ -103,4 +126,25 @@ public class PlayerListener implements Listener {
 		
 	}
 
+	/**
+	 * Event when player gets a violent hit.
+	 * @param entityHit
+	 */
+	@EventHandler
+	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
+		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > maxDamageBeforeInjury){
+			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
+		}
+	}
+	
+	/**
+	 * Event when player use a bandage (consumable item) for healing purpose.
+	 * @param consumeItem
+	 */
+	@EventHandler
+	public void onPlayerHealing(PlayerItemConsumeEvent consumeItem) {
+		if(consumeItem.getItem().getType().equals(bandage)) {
+			PlayerEvent.playerHealingInjuries((LivingEntity) consumeItem.getPlayer());
+		}
+	}
 }
