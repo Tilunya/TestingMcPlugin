@@ -3,10 +3,10 @@ package com.tilundev.testingplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.tilundev.testingplugin.commands.CommandsKit;
+import com.tilundev.testingplugin.data.database.ConfigDatabase;
 import com.tilundev.testingplugin.initializer.InitializerListener;
 import com.tilundev.testingplugin.scoreboard.ScoreboardObjectives;
 import com.tilundev.testingplugin.timer.TimerLostStatusPlayer;
-import com.tilundev.testingplugin.timer.TimerPlayer;
 
 public class Main extends JavaPlugin {
 
@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
 		else {
 			System.out.println("Error on setting kitDiamond");
 		}
-
+		ConfigDatabase.createNewDatabase("main.db");
 		InitializerListener.init(this);
 		ScoreboardObjectives.initQuest();
 		initTimers();
