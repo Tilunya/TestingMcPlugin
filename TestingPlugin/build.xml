@@ -7,4 +7,11 @@
             <fileset file="plugin.yml"></fileset>
         </jar>
 	</target>
+	<target name="makejar_prod" description="Create a jar for the project lul">
+		<mkdir dir="target"></mkdir>
+        <jar destfile="I:/Serveur minecraft Spigot/plugins/TestPlugin.jar">
+            <fileset dir="bin"></fileset>
+            <fileset file="plugin.yml"></fileset>
+        </jar>
+	</target>
 </project>

@@ -1,4 +1,4 @@
-   main: com.tilundev.testingplugin.Main
+   main: com.zomboplugin.Main
    name: TestingPlugin
    version: 0.1
    author: TilunDev
