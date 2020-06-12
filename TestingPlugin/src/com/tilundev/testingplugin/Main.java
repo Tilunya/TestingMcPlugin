@@ -32,10 +32,8 @@ public class Main extends JavaPlugin {
 	
 	//TODO Change values to config's values
 	public void initTimers() {
-		TimerPlayer timerHydrationPlayer = new TimerPlayer();
-		timerHydrationPlayer.runTaskTimer(this, 20, 20);
 		TimerLostStatusPlayer lostStatusPlayerTimer = new TimerLostStatusPlayer();
-		lostStatusPlayerTimer.runTaskTimer(this, 5, 5);
+		lostStatusPlayerTimer.runTaskTimer(this, 400, 400);
 		
 	}
 

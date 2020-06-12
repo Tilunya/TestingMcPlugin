@@ -1,6 +1,8 @@
 package com.tilundev.testingplugin.data;
 
 import org.bukkit.Bukkit;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.tilundev.testingplugin.listeners.event.HydrationChangeEvent;
 
@@ -83,25 +85,34 @@ public class StatePlayerData {
 	}
 	
 	public void drinkClearWater(PlayerData playerData) {
-		_hydration += 25;
+		double valAdd = 35.0;
+		_hydration += valAdd;
 		if(_hydration.compareTo(100.0)>0) {
 			_hydration = 100.0;
 		}
-		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, 25, false);
+		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, valAdd, false);
 		Bukkit.getPluginManager().callEvent(hce);
 	}
 
 	public void drinkDirtWater(PlayerData playerData) {
-		_hydration += 6;
+		double valAdd = 5.2;
+		_hydration += valAdd;
 		if(_hydration.compareTo(100.0)>0) {
 			_hydration = 100.0;
 		}
-		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, 6, false);
+		if(Double.compare((Math.random()*100.0),75.0) <= 0){
+			playerData.get_player().addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 1));
+		}
+		if(Double.compare((Math.random()*100.0),40.0) <= 0){
+			playerData.get_player().addPotionEffect(new PotionEffect(PotionEffectType.POISON, 200, 1));
+		}
+		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, valAdd, false);
 		Bukkit.getPluginManager().callEvent(hce);
 	}
 	
 	public void lostHydration(PlayerData playerData) {
-		_hydration -= 4;
+		double valAdd = 1.2;
+		_hydration -= valAdd;
 		if(_hydration.compareTo(0.0)<0) {
 			_hydration = 0.0;
 		}
@@ -110,11 +121,12 @@ public class StatePlayerData {
 	}
 	
 	public void lostNaturalHydration(PlayerData playerData) {
-		_hydration -= 0.5;
+		double valAdd = 0.5;
+		_hydration -= valAdd;
 		if(_hydration.compareTo(0.0)<0) {
 			_hydration = 0.0;
 		}
-		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, 0.5, true);
+		HydrationChangeEvent hce = new HydrationChangeEvent(playerData, valAdd, true);
 		Bukkit.getPluginManager().callEvent(hce);
 	}
 	
