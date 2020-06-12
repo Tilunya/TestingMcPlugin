@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import com.tilundev.testingplugin.listeners.functional.ZombieEvent;
+import com.tilundev.testingplugin.listeners.event.ZombieEvent;
 import com.tilundev.testingplugin.util.ZombieEnum;
 
 public class ZombieListener implements Listener {
