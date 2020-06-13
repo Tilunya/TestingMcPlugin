@@ -2,20 +2,47 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ZomboPlugin</groupId>
   <artifactId>ZomboPlugin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.2-SNAPSHOT</version>
   <name>ZomboPlugin</name>
   <description>A Minecraft Plugin for make zombies more angrier and more deadly</description>
+  
+  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+  <dependencies>
+	<dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>5.4.17.Final</version>
+	</dependency>
+	</dependencies>
 
-
-  <build>
-    <sourceDirectory>src</sourceDirectory>
+ <build>
+ 	<resources>
+      <resource>
+        <filtering>false</filtering>
+        <directory>${basedir}</directory>
+        <includes>
+          <include>plugin.yml</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>9</release>
-        </configuration>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>ant-magic</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <ant antfile="${basedir}/build.xml"
+                     target="makejar"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

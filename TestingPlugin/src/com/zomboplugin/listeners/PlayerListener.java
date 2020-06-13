@@ -23,7 +23,7 @@ import org.bukkit.potion.PotionType;
 
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.listeners.functional.PlayerEvent;
+import com.zomboplugin.listeners.event.PlayerEvent;
 import com.zomboplugin.scoreboard.ScoreboardObjectives;
 import com.zomboplugin.scoreboard.StateScoreboard;
 
@@ -89,6 +89,8 @@ public class PlayerListener implements Listener {
 			}
 		}
 	}
+	
+	
 	/**
 	 * Event when player fall from a high place.
 	 * @param entityDamaged

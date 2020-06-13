@@ -1,7 +1,7 @@
    main: com.zomboplugin.Main
-   name: TestingPlugin
-   version: 0.1
-   author: TilunDev
+   name: ZomboPlugin
+   version: 0.2
+   author: TilunDev and Anidli
    description: A Testing plugin for training purpose
    api-version: 1.15
    commands:
