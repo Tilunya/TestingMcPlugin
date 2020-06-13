@@ -1,10 +1,11 @@
 package com.zomboplugin.listeners;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
-import com.zomboplugin.listeners.functional.WorldEvent;
+import com.zomboplugin.listeners.event.WorldEvent;
 
 public class WorldListener implements Listener {
 
