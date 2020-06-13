@@ -8,3 +8,6 @@
       kit:
          description: Give 64 Diamonds
          usage: /<command>
+      apocalypse:
+         description: Set the difficulty of you apocalypse
+         usage: /<command>
