@@ -1,8 +1,7 @@
-package com.tilundev.testingplugin.data.database;
+package com.zomboplugin.data.database;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 

@@ -4,7 +4,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.scoreboard.StateScoreboard;
+
 
 public class TimerLostStatusPlayer extends BukkitRunnable {
 

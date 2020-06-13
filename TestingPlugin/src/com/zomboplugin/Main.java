@@ -3,10 +3,10 @@ package com.zomboplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zomboplugin.commands.CommandsKit;
+import com.zomboplugin.data.database.ConfigDatabase;
 import com.zomboplugin.initializer.InitializerListener;
 import com.zomboplugin.scoreboard.ScoreboardObjectives;
 import com.zomboplugin.timer.TimerLostStatusPlayer;
-import com.zomboplugin.timer.TimerPlayer;
 
 public class Main extends JavaPlugin {
 
@@ -19,6 +19,7 @@ public class Main extends JavaPlugin {
 		else {
 			System.out.println("Error on setting kitDiamond");
 		}
+		ConfigDatabase.createNewDatabase("main.db");
 
 		InitializerListener.init(this);
 		ScoreboardObjectives.initQuest();
