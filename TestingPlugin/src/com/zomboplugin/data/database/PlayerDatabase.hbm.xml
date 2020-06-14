@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibrenate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+	
+<hibernate-mapping package="com.zomboplugin.data.database">
+	<class name="PlayerDatabase" table="PLAYERS">
+		<id name="_UUID" column="PLAYER_UUID">
+		</id>
+		<property name="_name" type="String" column="PLAYER_NAME"></property>
+		<property name="_hydration" type="Double" column="PLAYER_HYDRATION"></property>
+		<property name="_exhaution" type="Double" column="PLAYER_EXHAUTION"></property>
+		<property name="_infected" type="boolean" column="PLAYER_IS_INFECTED"></property>
+		<property name="_legInjured" type="boolean" column="PLAYER_IS_LEG_INJURED"></property>
+		<property name="_armInjured" type="boolean" column="PLAYER_IS_ARM_INJURED"></property>
+	</class>
+</hibernate-mapping>

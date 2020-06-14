@@ -24,6 +24,7 @@ import org.bukkit.potion.PotionType;
 import com.zomboplugin.config.IOConfigFiles;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
+import com.zomboplugin.data.database.PlayerDatabaseManager;
 import com.zomboplugin.listeners.event.PlayerEvent;
 import com.zomboplugin.scoreboard.ScoreboardObjectives;
 import com.zomboplugin.scoreboard.StateScoreboard;
@@ -38,6 +39,7 @@ public class PlayerListener implements Listener {
 		Player player = event.getPlayer();
 		PlayerData playerData = PersistData.addPersistantPlayer(player);
 		StateScoreboard.initState(playerData);
+		PlayerDatabaseManager.createAndStorePlayerDatabase(playerData);
 	}
 
 	@EventHandler

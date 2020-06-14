@@ -27,6 +27,7 @@ public class ConfigDatabase {
             if (conn != null) {
                 System.out.println("Connection to SQLite has been established");
             }
+            conn.close();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -38,7 +39,9 @@ public class ConfigDatabase {
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
             }
-        } 
+        }
+        
+        
     }
 
 }
