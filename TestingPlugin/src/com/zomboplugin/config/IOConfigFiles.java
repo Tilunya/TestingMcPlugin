@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.bukkit.Bukkit;
-
 public class IOConfigFiles {
 /* *
  * ATTRIBUTS
@@ -26,8 +24,8 @@ public class IOConfigFiles {
 			"SLOW_EFFECT_ZOMBIE_GRAB = 0\n" + 
 			"NAUSEA_EFFECT_ZOMBIE_GRAB = 0\n" + 
 			"POISON_EFFECT_ZOMBIE_GRAB = 0\n" + 
-			"FALLING_LIMIT = 10\n" + 
-			"HIT_LIMIT = 10\n" + 
+			"FALLING_LIMIT = 15\n" + 
+			"HIT_LIMIT = 15\n" + 
 			"SLOW_EFFECT_FALLING_MALUS = 0\n" + 
 			"SLOWDIGGING_EFFECT_HIT_MALUS = 0\n" +
 			"DEHYDRATION_SPEED = 0\n" + 
@@ -44,8 +42,8 @@ public class IOConfigFiles {
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "0");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "0");
 			put("POISON_EFFECT_ZOMBIE_GRAB",	 "0");
-			put("FALLING_LIMIT",				 "10");
-			put("HIT_LIMIT",					 "10");
+			put("FALLING_LIMIT",				 "15");
+			put("HIT_LIMIT",					 "15");
 			put("SLOW_EFFECT_FALLING_MALUS",	 "0");
 			put("SLOWDIGGING_EFFECT_HIT_MALUS",	 "0");
 			put("DEHYDRATION_SPEED",			 "0");
@@ -65,8 +63,8 @@ public class IOConfigFiles {
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "1");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "1");
 			put("POISON_EFFECT_ZOMBIE_GRAB",	 "1");
-			put("FALLING_LIMIT",				 "7");
-			put("HIT_LIMIT",					 "7");
+			put("FALLING_LIMIT",				 "11");
+			put("HIT_LIMIT",					 "11");
 			put("SLOW_EFFECT_FALLING_MALUS",	 "1");
 			put("SLOWDIGGING_EFFECT_HIT_MALUS",	 "1");
 			put("DEHYDRATION_SPEED",			 "2");
@@ -86,8 +84,8 @@ public class IOConfigFiles {
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "2");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "2");
 			put("POISON_EFFECT_ZOMBIE_GRAB",	 "2");
-			put("FALLING_LIMIT",				 "4");
-			put("HIT_LIMIT",					 "4");
+			put("FALLING_LIMIT",				 "6");
+			put("HIT_LIMIT",					 "6");
 			put("SLOW_EFFECT_FALLING_MALUS",	 "2");
 			put("SLOWDIGGING_EFFECT_HIT_MALUS",	 "2");
 			put("DEHYDRATION_SPEED",			 "2");
