@@ -21,6 +21,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionType;
 
+import com.zomboplugin.config.IOConfigFiles;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
 import com.zomboplugin.listeners.event.PlayerEvent;
@@ -30,8 +31,6 @@ import com.zomboplugin.scoreboard.StateScoreboard;
 public class PlayerListener implements Listener {
 	
 	//TODO : Those two variables can be moved into a configuration file.
-	private int maxHightBeforeInjury = 5;
-	private int maxDamageBeforeInjury = 5;
 	private Material bandage = Material.BREAD;
 	
 	@EventHandler
@@ -97,7 +96,7 @@ public class PlayerListener implements Listener {
 	 */
 	@EventHandler
 	public void onPlayerFall(EntityDamageEvent entityDamaged) {
-		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > maxHightBeforeInjury) {
+		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > Integer.parseInt(IOConfigFiles.getConfigValue("FALLING_LIMIT"))) {
 			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
 		}
 	}
@@ -128,7 +127,8 @@ public class PlayerListener implements Listener {
 	 */
 	@EventHandler
 	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
-		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > maxDamageBeforeInjury){
+		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || 
+				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOConfigFiles.getConfigValue("HIT_LIMIT"))){
 			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
 		}
 	}
