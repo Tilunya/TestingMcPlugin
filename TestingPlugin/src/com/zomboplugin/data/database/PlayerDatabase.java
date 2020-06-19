@@ -2,17 +2,59 @@ package com.zomboplugin.data.database;
 
 import java.util.UUID;
 
-import com.zomboplugin.data.PlayerData;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.bukkit.Bukkit;
+import org.hibernate.annotations.Type;
+
+import com.zomboplugin.data.PlayerData;
+import com.zomboplugin.listeners.event.HydrationChangeEvent;
+
+
+@Entity(name = "PLAYER")
+@Table(name = "PLAYER")
 public class PlayerDatabase {
+
+	public static final String TABLE = "PLAYER";
+	public static final String TABLE_UUID = "UUID";
+	public static final String TABLE_UUID_VAR = "_UUID";
+	public static final String TABLE_NAME = "NAME";
+	public static final String TABLE_NAME_VAR = "_name";
+	public static final String TABLE_HYDRATION = "HYDRATION";
+	public static final String TABLE_HYDRATION_VAR = "_hydration";
+	public static final String TABLE_EXHAUTION = "EXHAUTION";
+	public static final String TABLE_EXHAUTION_VAR = "_exhaution";
+	public static final String TABLE_INFECTED = "INFECTED";
+	public static final String TABLE_INFECTED_VAR = "_infected";
+	public static final String TABLE_ARM_INJURED = "ARM_INJURED";
+	public static final String TABLE_ARM_INJURED_VAR = "__armInjured";
+	public static final String TABLE_LEG_INJURED = "LEG_INJURED";
+	public static final String TABLE_LEG_INJURED_VAR = "_legInjured";
 	
+	@Id
+	@Type(type = "uuid-char")
+	@Column(name = TABLE_UUID)
 	private UUID _UUID;
-	
+
+	@Column(name = TABLE_NAME)
 	private String _name;
+	
+	@Column(name = TABLE_HYDRATION)
 	private Double _hydration;
+	
+	@Column(name = TABLE_EXHAUTION)
 	private Double _exhaution;
+	
+	@Column(name = TABLE_INFECTED)
 	private boolean _infected;
+	
+	@Column(name = TABLE_ARM_INJURED)
 	private boolean _legInjured;
+	
+	@Column(name = TABLE_LEG_INJURED)
 	private boolean _armInjured;
 	
 	
@@ -98,6 +140,16 @@ public class PlayerDatabase {
 		this._hydration = playerData.get_state().get_hydration();
 		this._exhaution = playerData.get_state().get_tiredness();
 		this._armInjured = false;
+	}
+	
+	public PlayerData updatePlayerData(PlayerData player) {
+		player.get_state().set_hydration(this._hydration);
+		player.get_state().set_tiredness(this._exhaution);
+		player.get_state().set_infected(this._infected);
+		HydrationChangeEvent hce = new HydrationChangeEvent(player, 0, true);
+		Bukkit.getPluginManager().callEvent(hce);
+		
+		return player;
 	}
 
 }

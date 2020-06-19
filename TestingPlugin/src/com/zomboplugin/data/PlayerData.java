@@ -1,11 +1,13 @@
 package com.zomboplugin.data;
 
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Objective;
 
 public class PlayerData {
 	
 	private Player _player;
 	private StatePlayerData _state;
+	private Objective _stateScoreboard = null;
 	
 	public static final float DEFAULT_WALKING_SPEED = 0.2f;
 	
@@ -16,6 +18,9 @@ public class PlayerData {
 	public StatePlayerData get_state() {
 		return _state;
 	}
+	public Objective get_stateScoreboard() {
+		return _stateScoreboard;
+	}
 	
 	
 	// ---- SETTER ----
@@ -24,6 +29,9 @@ public class PlayerData {
 	}
 	public void set_state(StatePlayerData _state) {
 		this._state = _state;
+	}
+	public void set_stateScoreboard(Objective _stateScoreboard) {
+		this._stateScoreboard = _stateScoreboard;
 	}
 	
 	

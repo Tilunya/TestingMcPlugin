@@ -50,4 +50,9 @@ public class PersistData {
 		return null;
 	}
 	
+	public static void clearAllPlayer() {
+		_playerConnectedList.clear();
+	}
+	
+	
 }

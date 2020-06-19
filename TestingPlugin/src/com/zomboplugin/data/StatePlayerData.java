@@ -79,7 +79,7 @@ public class StatePlayerData {
 	
 	public void initStatePlayer() {
 		_hydration = 50.0;
-		_tiredness = 50.0;
+		_tiredness = 75.0;
 		_hydrationLevel = 1;
 		_infected = false;
 	}
@@ -137,5 +137,48 @@ public class StatePlayerData {
 		}
 	}
 	
+	public int getLevelByHydration(double hydration) {
+		int newLvl = -1;
+		if(Double.compare(hydration,90) > 0) {
+			newLvl = 0;
+		} 
+		else if (Double.compare(hydration, 90) <= 0 && Double.compare(hydration, 30) > 0) {
+			newLvl = 1;
+		}
+		else if (Double.compare(hydration, 30) <= 0 && Double.compare(hydration, 15) > 0) {
+			newLvl = 2;
+		}
+		else if (Double.compare(hydration, 15) <= 0 && Double.compare(hydration, 5) > 0) {
+			newLvl = 3;
+		}
+		else if (Double.compare(hydration, 5) <= 0 && Double.compare(hydration, 0) > 0) {
+			newLvl = 4;
+		}
+		else if (Double.compare(hydration, 0) <= 0 ) {
+			newLvl = 5;
+		}
+		return newLvl;
+	}
+	
+	public void setLevelByHydration() {
+		if(Double.compare(this._hydration,90) > 0) {
+			this._hydrationLevel = 0;
+		} 
+		else if (Double.compare(this._hydration, 90) <= 0 && Double.compare(this._hydration, 30) > 0) {
+			this._hydrationLevel = 1;
+		}
+		else if (Double.compare(this._hydration, 30) <= 0 && Double.compare(this._hydration, 15) > 0) {
+			this._hydrationLevel = 2;
+		}
+		else if (Double.compare(this._hydration, 15) <= 0 && Double.compare(this._hydration, 5) > 0) {
+			this._hydrationLevel = 3;
+		}
+		else if (Double.compare(this._hydration, 5) <= 0 && Double.compare(this._hydration, 0) > 0) {
+			this._hydrationLevel = 4;
+		}
+		else if (Double.compare(this._hydration, 0) <= 0 ) {
+			this._hydrationLevel = 5;
+		}
+	}
 	
 }

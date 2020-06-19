@@ -48,18 +48,18 @@
 		
 	</dependencies>
 
- <build>
-    <sourceDirectory>src</sourceDirectory>
- 	<resources>
-      <resource>
-        <filtering>false</filtering>
-        <directory>${basedir}</directory>
-        <includes>
-          <include>plugin.yml</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
+ 	<build>
+    	<sourceDirectory>src</sourceDirectory>
+ 		<resources>
+      		<resource>
+        		<filtering>false</filtering>
+        		<directory>${basedir}</directory>
+        		<includes>
+          			<include>plugin.yml</include>
+        		</includes>
+      		</resource>
+    	</resources>
+    	<plugins>
     	<!--  <plugin>
     		<groupId>com.github.ekryd.echo-maven-plugin</groupId>
     		<artifactId>echo-maven-plugin</artifactId>
@@ -76,52 +76,48 @@
         		</execution>
     		</executions>
 		</plugin> -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.1</version>
-			<configuration>
-				<showDeprecation>true</showDeprecation>
-				<showWarnings>true</showWarnings>
-        		<source>9</source>
-        		<target>9</target>
-        		<compilerArgs>
-        			<arg>${module.path}</arg>
-        		</compilerArgs>
-			</configuration>
-		</plugin>
-    	<plugin>
-           	<groupId>org.apache.maven.plugins</groupId>
-      	    <artifactId>maven-jar-plugin</artifactId>
-  	        <configuration>	
-				<archive>
-					<!-- Création du Manifest pour la définition de la classe Main -->
-					<manifest>
-                    	<mainClass>com.zomboplugin.Main</mainClass>
-					</manifest>
-				</archive>
-			</configuration>
-		</plugin>
- <!--     <plugin> 
-        <artifactId>maven-antrun-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>ant-magic</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <tasks>
-                <ant antfile="build.xml"
-                     target="clean"/>
-                <ant antfile="build.xml"
-                     target="compile"/>
-              </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin> -->
-    </plugins>
-  </build>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+        			<source>9</source>
+        			<target>9</target>
+        			<compilerArgs>
+        				<arg>${module.path}</arg>
+        			</compilerArgs>
+				</configuration>
+			</plugin>
+    		<plugin>
+           		<groupId>org.apache.maven.plugins</groupId>
+      	    	<artifactId>maven-jar-plugin</artifactId>
+  	        	<configuration>	
+					<archive>
+						<!-- Création du Manifest pour la définition de la classe Main -->
+						<manifest>
+                    		<mainClass>com.zomboplugin.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+       			<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-shade-plugin</artifactId>
+        		<version>3.2.4</version>
+        		<executions>
+          			<execution>
+            			<phase>package</phase>
+            			<goals>
+              				<goal>shade</goal>
+            			</goals>
+            			<!-- <configuration>
+            				<minimizeJar>true</minimizeJar>
+            			</configuration> -->
+          			</execution>
+        		</executions>
+      		</plugin>
+    	</plugins>
+  	</build>
 </project>

@@ -6,10 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.zomboplugin.commands.ApocalypseDifficulty;
 import com.zomboplugin.commands.CommandsKit;
 import com.zomboplugin.config.IOConfigFiles;
+import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.database.ConfigDatabase;
+import com.zomboplugin.initializer.CommandsInitializer;
 import com.zomboplugin.initializer.InitializerListener;
-import com.zomboplugin.scoreboard.ScoreboardObjectives;
-import com.zomboplugin.timer.TimerLostStatusPlayer;
+import com.zomboplugin.initializer.TimerInitializer;
 
 public class Main extends JavaPlugin {
 
@@ -18,37 +19,18 @@ public class Main extends JavaPlugin {
 
 		IOConfigFiles.manageConfigurationFiles();
 
-		if(getCommand("kit") != null) {
-			getCommand("kit").setExecutor(new CommandsKit());
-		}
-		else {
-			System.out.println("Error on setting kitDiamond");
-		}
-		
-		if(getCommand("apocalypse") != null) {
-			getCommand("apocalypse").setExecutor(new ApocalypseDifficulty());
-		}
-		else {
-			Bukkit.getConsoleSender().sendMessage("Error on setting apocalypse difficulty");
-		}
+		CommandsInitializer.InitializeCommands(this);
 		
 		ConfigDatabase.createNewDatabase("main.db");
 
 		InitializerListener.init(this);
-		ScoreboardObjectives.initQuest();
-		initTimers();
+		TimerInitializer.initializeTimers(this);
 	}
 
 	@Override
 	public void onDisable() {
-
-	}
-	
-	//TODO Change values to config's values
-	public void initTimers() {
-		TimerLostStatusPlayer lostStatusPlayerTimer = new TimerLostStatusPlayer();
-		lostStatusPlayerTimer.runTaskTimer(this, 400, 400);
-		
+		TimerInitializer.stopAllTimers(this);
+		PersistData.clearAllPlayer();
 	}
 
 }
