@@ -24,8 +24,8 @@ import org.bukkit.potion.PotionType;
 import com.zomboplugin.config.IOConfigFiles;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
+import com.zomboplugin.data.database.PlayerDatabaseManager;
 import com.zomboplugin.listeners.event.PlayerEvent;
-import com.zomboplugin.scoreboard.ScoreboardObjectives;
 import com.zomboplugin.scoreboard.StateScoreboard;
 
 public class PlayerListener implements Listener {
@@ -36,13 +36,27 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		PlayerDatabaseManager pdm = new PlayerDatabaseManager();
 		PlayerData playerData = PersistData.addPersistantPlayer(player);
+		playerData = pdm.findOnePlayerDatabase(playerData);
+		
+		if(playerData == null) {
+			PersistData.removePersistantPlayer(player);
+			playerData = PersistData.addPersistantPlayer(player);
+			pdm.saveOrUpdatePlayerDatabase(playerData);
+		} 
+
 		StateScoreboard.initState(playerData);
+		pdm.closeSession();
 	}
 
 	@EventHandler
 	public void onPlayerQuitEvent(PlayerQuitEvent pqe) {
 		Player player = pqe.getPlayer();
+		PlayerData playerData = PersistData.getPlayerData(player);
+		PlayerDatabaseManager pdm = new PlayerDatabaseManager();
+		pdm.saveOrUpdatePlayerDatabase(playerData);
+		pdm.closeSession();
 		PersistData.removePersistantPlayer(player);
 	}
 	
@@ -50,29 +64,29 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent block) {
 		// Search for a better method
-		List<Material> logs = new ArrayList<>();
-		logs.add(Material.ACACIA_LOG);
-		logs.add(Material.BIRCH_LOG);
-		logs.add(Material.DARK_OAK_LOG);
-		logs.add(Material.JUNGLE_LOG);
-		logs.add(Material.OAK_LOG);
-		logs.add(Material.SPRUCE_LOG);
-		logs.add(Material.STRIPPED_ACACIA_LOG);
-		logs.add(Material.STRIPPED_BIRCH_LOG);
-		logs.add(Material.STRIPPED_DARK_OAK_LOG);
-		logs.add(Material.STRIPPED_JUNGLE_LOG);
-		logs.add(Material.STRIPPED_OAK_LOG);
-		logs.add(Material.STRIPPED_SPRUCE_LOG);
-		
-		if (logs.contains(block.getBlock().getType())) {
-			ScoreboardObjectives.addScore(0);
-		} 
-		else if (block.getBlock().getType() == Material.STONE) {
-			ScoreboardObjectives.addScore(1);
-		}
-		else if (block.getBlock().getType() == Material.COAL_ORE) {
-			ScoreboardObjectives.addScore(2);
-		}
+//		List<Material> logs = new ArrayList<>();
+//		logs.add(Material.ACACIA_LOG);
+//		logs.add(Material.BIRCH_LOG);
+//		logs.add(Material.DARK_OAK_LOG);
+//		logs.add(Material.JUNGLE_LOG);
+//		logs.add(Material.OAK_LOG);
+//		logs.add(Material.SPRUCE_LOG);
+//		logs.add(Material.STRIPPED_ACACIA_LOG);
+//		logs.add(Material.STRIPPED_BIRCH_LOG);
+//		logs.add(Material.STRIPPED_DARK_OAK_LOG);
+//		logs.add(Material.STRIPPED_JUNGLE_LOG);
+//		logs.add(Material.STRIPPED_OAK_LOG);
+//		logs.add(Material.STRIPPED_SPRUCE_LOG);
+//		
+//		if (logs.contains(block.getBlock().getType())) {
+//			ScoreboardObjectives.addScore(0);
+//		} 
+//		else if (block.getBlock().getType() == Material.STONE) {
+//			ScoreboardObjectives.addScore(1);
+//		}
+//		else if (block.getBlock().getType() == Material.COAL_ORE) {
+//			ScoreboardObjectives.addScore(2);
+//		}
 	}
 	
 	@EventHandler
@@ -118,6 +132,9 @@ public class PlayerListener implements Listener {
 		playerData.get_state().initStatePlayer();
 		playerData.get_player().setWalkSpeed(PlayerData.DEFAULT_WALKING_SPEED);
 		StateScoreboard.updateScoreboard(playerData);
+		PlayerDatabaseManager pdm = new PlayerDatabaseManager();
+		pdm.saveOrUpdatePlayerDatabase(playerData);
+		pdm.closeSession();
 		
 	}
 
