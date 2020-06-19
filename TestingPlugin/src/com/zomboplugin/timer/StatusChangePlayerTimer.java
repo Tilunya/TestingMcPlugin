@@ -6,7 +6,7 @@ import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
 
 
-public class TimerLostStatusPlayer extends BukkitRunnable {
+public class StatusChangePlayerTimer extends BukkitRunnable {
 
 	@Override
 	public void run() {

@@ -2,12 +2,12 @@ package com.zomboplugin.initializer;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.zomboplugin.listeners.HydrationChangeListener;
-import com.zomboplugin.listeners.PlayerListener;
-import com.zomboplugin.listeners.WorldListener;
-import com.zomboplugin.listeners.ZombieListener;
+import com.zomboplugin.listener.HydrationChangeListener;
+import com.zomboplugin.listener.PlayerListener;
+import com.zomboplugin.listener.WorldListener;
+import com.zomboplugin.listener.ZombieListener;
 
-public class InitializerListener {
+public class ListenersInitializer {
 	
 	public static void init(JavaPlugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(new PlayerListener(), plugin);

@@ -1,10 +1,10 @@
-package com.zomboplugin.listeners.event;
+package com.zomboplugin.listener.event;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.zomboplugin.config.IOConfigFiles;
+import com.zomboplugin.config.IOFileConfig;
 
 public class PlayerEvent {
 
@@ -14,7 +14,7 @@ public class PlayerEvent {
 	 * @param player
 	 */
 	public static void brokenHarm(LivingEntity player) {
-		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.parseInt(IOConfigFiles.getConfigValue("SLOWDIGGING_EFFECT_HIT_MALUS"))));
+		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, Integer.parseInt(IOFileConfig.getConfigValue("SLOWDIGGING_EFFECT_HIT_MALUS"))));
 		//TODO : add "broken leg" to the status scoreboard of the player.
 	}
 	
@@ -24,7 +24,7 @@ public class PlayerEvent {
 	 * @param player
 	 */
 	public static void brokenLeg(LivingEntity player) {
-		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.parseInt(IOConfigFiles.getConfigValue("SLOW_EFFECT_FALLING_MALUS"))));
+		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, Integer.parseInt(IOFileConfig.getConfigValue("SLOW_EFFECT_FALLING_MALUS"))));
 		//TODO : add "broken harm" to the status scoreboard of the player.
 	}
 	

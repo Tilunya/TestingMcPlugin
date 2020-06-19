@@ -1,4 +1,4 @@
-package com.zomboplugin.listeners.event;
+package com.zomboplugin.listener.event;
 
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

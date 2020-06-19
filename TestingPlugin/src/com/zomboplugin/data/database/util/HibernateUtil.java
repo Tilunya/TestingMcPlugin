@@ -1,4 +1,4 @@
-package com.zomboplugin.data.database;
+package com.zomboplugin.data.database.util;
 
 import java.io.File;
 
