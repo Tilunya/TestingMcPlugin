@@ -1,8 +1,8 @@
-package com.zomboplugin.listeners.event;
+package com.zomboplugin.listener.event;
 
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import com.zomboplugin.util.ZombieEnum;
+import com.zomboplugin.util.ZombieEnumUtil;
 
 public class WorldEvent {
 
@@ -11,7 +11,7 @@ public class WorldEvent {
 	 * @param entity
 	 */
 	public static void manageMobSpawning(CreatureSpawnEvent entity) {
-        if (!ZombieEnum.isContain(entity.getEntity().getType())) {
+        if (!ZombieEnumUtil.isContain(entity.getEntity().getType())) {
         	entity.getEntity().remove();
         }
     }

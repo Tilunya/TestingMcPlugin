@@ -4,7 +4,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.data.database.PlayerDatabaseManager;
+import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
 
 public class DatabaseBackupTimer extends BukkitRunnable {
 

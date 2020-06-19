@@ -1,4 +1,4 @@
-package com.zomboplugin.listeners;
+package com.zomboplugin.listener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +21,11 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionType;
 
-import com.zomboplugin.config.IOConfigFiles;
+import com.zomboplugin.config.IOFileConfig;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.data.database.PlayerDatabaseManager;
-import com.zomboplugin.listeners.event.PlayerEvent;
+import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
+import com.zomboplugin.listener.event.PlayerEvent;
 import com.zomboplugin.scoreboard.StateScoreboard;
 
 public class PlayerListener implements Listener {
@@ -110,7 +110,7 @@ public class PlayerListener implements Listener {
 	 */
 	@EventHandler
 	public void onPlayerFall(EntityDamageEvent entityDamaged) {
-		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > Integer.parseInt(IOConfigFiles.getConfigValue("FALLING_LIMIT"))) {
+		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("FALLING_LIMIT"))) {
 			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
 		}
 	}
@@ -145,7 +145,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
 		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || 
-				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOConfigFiles.getConfigValue("HIT_LIMIT"))){
+				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("HIT_LIMIT"))){
 			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
 		}
 	}

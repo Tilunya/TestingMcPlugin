@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.zomboplugin.listeners.event.HydrationChangeEvent;
+import com.zomboplugin.listener.event.HydrationChangeEvent;
 
 public class StatePlayerData {
 	

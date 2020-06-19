@@ -3,11 +3,11 @@ package com.zomboplugin.initializer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zomboplugin.timer.DatabaseBackupTimer;
-import com.zomboplugin.timer.TimerLostStatusPlayer;
+import com.zomboplugin.timer.StatusChangePlayerTimer;
 
 public class TimerInitializer {
 	
-	private static TimerLostStatusPlayer lostStatusPlayerTimer = new TimerLostStatusPlayer();
+	private static StatusChangePlayerTimer lostStatusPlayerTimer = new StatusChangePlayerTimer();
 	private static DatabaseBackupTimer databaseBackupTimer = new DatabaseBackupTimer();
 	
 	public static void initializeTimers(JavaPlugin plugin) {

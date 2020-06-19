@@ -1,4 +1,4 @@
-package com.zomboplugin.listeners.event;
+package com.zomboplugin.listener.event;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;

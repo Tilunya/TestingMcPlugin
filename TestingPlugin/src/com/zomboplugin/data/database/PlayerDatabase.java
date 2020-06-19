@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
 import org.hibernate.annotations.Type;
 
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.listeners.event.HydrationChangeEvent;
+import com.zomboplugin.listener.event.HydrationChangeEvent;
 
 
 @Entity(name = "PLAYER")

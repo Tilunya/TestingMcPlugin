@@ -1,4 +1,4 @@
-package com.zomboplugin.data.database;
+package com.zomboplugin.data.database.manager;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -7,6 +7,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.query.Query;
 
 import com.zomboplugin.data.PlayerData;
+import com.zomboplugin.data.database.PlayerDatabase;
+import com.zomboplugin.data.database.util.HibernateUtil;
 
 public class PlayerDatabaseManager extends HibernateUtil {
 	

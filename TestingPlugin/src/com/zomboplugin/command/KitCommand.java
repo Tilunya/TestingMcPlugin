@@ -1,4 +1,4 @@
-package com.zomboplugin.commands;
+package com.zomboplugin.command;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class CommandsKit implements CommandExecutor {
+public class KitCommand implements CommandExecutor {
 
 	/**
 	 * @param sender :  Whatever is sending the command

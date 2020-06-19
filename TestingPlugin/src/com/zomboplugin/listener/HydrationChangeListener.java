@@ -1,4 +1,4 @@
-package com.zomboplugin.listeners;
+package com.zomboplugin.listener;
 
 import java.util.Iterator;
 
@@ -8,8 +8,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.data.database.PlayerDatabaseManager;
-import com.zomboplugin.listeners.event.HydrationChangeEvent;
+import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
+import com.zomboplugin.listener.event.HydrationChangeEvent;
 
 public class HydrationChangeListener implements Listener {
 
