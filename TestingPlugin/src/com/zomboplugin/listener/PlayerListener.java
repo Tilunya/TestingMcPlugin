@@ -1,12 +1,12 @@
 package com.zomboplugin.listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -14,11 +14,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import com.zomboplugin.config.IOFileConfig;
@@ -121,6 +125,7 @@ public class PlayerListener implements Listener {
 			Player player = (Player) flc.getEntity();
 			PlayerData playerData = PersistData.getPlayerData(player);
 			playerData.get_state().lostHydration(playerData);
+			playerData.get_state().lostTiredness(playerData);
 			StateScoreboard.updateScoreboard(playerData);
 			
 		}
@@ -158,6 +163,35 @@ public class PlayerListener implements Listener {
 	public void onPlayerHealing(PlayerItemConsumeEvent consumeItem) {
 		if(consumeItem.getItem().getType().equals(bandage)) {
 			PlayerEvent.playerHealingInjuries((LivingEntity) consumeItem.getPlayer());
+		}
+	}
+	
+	
+	/**
+	 * Event when player enter in a bed
+	 * @param pbee
+	 */
+	@EventHandler
+	public void onPlayerBedEnter(PlayerBedEnterEvent pbee) {
+		pbee.setUseBed(Result.ALLOW);
+		pbee.getPlayer().sendMessage("You sleep. Press \"Sneak\" button for leave this state");
+		PlayerData playerData = PersistData.getPlayerData(pbee.getPlayer());
+		playerData.get_state().set_sleep(true);
+		playerData.refreshSpeed();
+		playerData.get_player().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 10));
+	}
+	
+	/**
+	 * Event when player enter in a bed
+	 * @param pbee
+	 */
+	@EventHandler
+	public void onPlayerToogleSneak(PlayerToggleSneakEvent ptse) {
+		PlayerData playerData = PersistData.getPlayerData(ptse.getPlayer());
+		if(playerData.get_state().is_sleep()) {
+			playerData.get_state().set_sleep(false);
+			playerData.refreshSpeed();
+			playerData.get_player().removePotionEffect(PotionEffectType.BLINDNESS);
 		}
 	}
 }

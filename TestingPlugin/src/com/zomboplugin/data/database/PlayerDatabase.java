@@ -11,7 +11,8 @@ import org.bukkit.Bukkit;
 import org.hibernate.annotations.Type;
 
 import com.zomboplugin.data.PlayerData;
-import com.zomboplugin.listener.event.HydrationChangeEvent;
+import com.zomboplugin.listener.event.HydExhChangeEvent;
+import com.zomboplugin.util.HydExhEnumUtil;
 
 
 @Entity(name = "PLAYER")
@@ -146,7 +147,7 @@ public class PlayerDatabase {
 		player.get_state().set_hydration(this._hydration);
 		player.get_state().set_tiredness(this._exhaution);
 		player.get_state().set_infected(this._infected);
-		HydrationChangeEvent hce = new HydrationChangeEvent(player, 0, true);
+		HydExhChangeEvent hce = new HydExhChangeEvent(player, 0, 0, true, HydExhEnumUtil.BOTH);
 		Bukkit.getPluginManager().callEvent(hce);
 		
 		return player;

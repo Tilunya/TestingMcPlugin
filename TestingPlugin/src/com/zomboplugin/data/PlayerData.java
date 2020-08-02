@@ -54,4 +54,8 @@ public class PlayerData {
 	public void naturaExhaustion() {
 		_player.setExhaustion(_player.getExhaustion()+0.5f);
 	}
+	
+	public void refreshSpeed() {
+		_player.setWalkSpeed(DEFAULT_WALKING_SPEED * _state.getSpeedModifier());
+	}
 }
