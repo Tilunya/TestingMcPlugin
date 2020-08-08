@@ -1,5 +1,7 @@
 package com.zomboplugin.data.database.manager;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -44,8 +46,12 @@ public class PlayerDatabaseManager extends HibernateUtil {
 		Root<PlayerDatabase> root = query.from(PlayerDatabase.class);
 		query.select(root).where(builder.equal(root.get(PlayerDatabase.TABLE_UUID_VAR), player.get_player().getUniqueId()));
 		Query<PlayerDatabase> q = session.createQuery(query);
-		PlayerDatabase playerDatabase = q.getSingleResult();
-		player = playerDatabase.updatePlayerData(player);
+		List<PlayerDatabase> playerDatabase = q.getResultList();
+		if(playerDatabase != null && playerDatabase.size() == 1) {
+			player = playerDatabase.get(0).updatePlayerData(player);
+		} else {
+			player = null;
+		}
 		this.transaction.commit();
 	
 		return player;
