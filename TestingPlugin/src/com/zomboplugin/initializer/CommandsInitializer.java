@@ -3,6 +3,7 @@ package com.zomboplugin.initializer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zomboplugin.command.ApocalypseDifficultyCommand;
+import com.zomboplugin.command.CureDesease;
 import com.zomboplugin.command.KitCommand;
 
 public class CommandsInitializer {
@@ -17,6 +18,13 @@ public class CommandsInitializer {
 		
 		if(plugin.getCommand("ZP_apocalypse") != null) {
 			plugin.getCommand("ZP_apocalypse").setExecutor(new ApocalypseDifficultyCommand());
+		}
+		else {
+			System.err.println("Error on setting apocalypse difficulty");
+		}
+		
+		if(plugin.getCommand("ZP_cure") != null) {
+			plugin.getCommand("ZP_cure").setExecutor(new CureDesease());
 		}
 		else {
 			System.err.println("Error on setting apocalypse difficulty");

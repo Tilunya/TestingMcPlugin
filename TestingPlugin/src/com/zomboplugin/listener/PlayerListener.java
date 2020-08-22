@@ -1,8 +1,5 @@
 package com.zomboplugin.listener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -22,6 +19,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionType;
 
 import com.zomboplugin.config.IOFileConfig;
+import com.zomboplugin.data.InfectedData;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
 import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
@@ -46,6 +44,9 @@ public class PlayerListener implements Listener {
 			pdm.saveOrUpdatePlayerDatabase(playerData);
 		} 
 
+		if(playerData.get_state().is_infected()) {
+			InfectedData.addInfectedPlayerToList(playerData);
+		}
 		StateScoreboard.initState(playerData);
 		pdm.closeSession();
 	}
@@ -58,6 +59,7 @@ public class PlayerListener implements Listener {
 		pdm.saveOrUpdatePlayerDatabase(playerData);
 		pdm.closeSession();
 		PersistData.removePersistantPlayer(player);
+		InfectedData.removeInfectedPlayerToList(playerData);
 	}
 	
 	

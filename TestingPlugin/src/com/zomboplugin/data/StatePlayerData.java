@@ -15,6 +15,8 @@ public class StatePlayerData {
 	private boolean _infected;
 	private int _hydrationLevel;
 	private int _tirednessLevel;
+	private int _infectionCountdown;
+	private int _infectionLevel;
 	
 	// ---- GETTER ----
 	public Double get_hydration() {
@@ -37,6 +39,12 @@ public class StatePlayerData {
 	}
 	public int get_tirednessLevel() {
 		return _tirednessLevel;
+	}
+	public int get_infectionCountdown() {
+		return _infectionCountdown;
+	}
+	public int get_infectionLevel() {
+		return _infectionLevel;
 	}
 	
 	
@@ -63,6 +71,12 @@ public class StatePlayerData {
 	}
 	public void set_tirednessLevel(int _tirednessLevel) {
 		this._tirednessLevel = _tirednessLevel;
+	}
+	public void set_infectionCountdown(int _infectionCountdown) {
+		this._infectionCountdown = _infectionCountdown;
+	}
+	public void set_infectionLevel(int _infectionLevel) {
+		this._infectionLevel = _infectionLevel;
 	}
 	
 	

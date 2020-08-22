@@ -19,7 +19,9 @@ public class IOFileConfig {
 	private static final String configurationFolderPath = "/ZomboPlugin";
 	private static final String configurationFilePath = "/config.properties";
 	private static String defaultConfigFile = "INFECTION_CHANCE_PERCENT = 85\n" + 
-			"INFECTION_SPEED = 1\n" + 
+			"INFECTION_SPEED = 20\n" + 
+			"INFECTION_COUNTDOWN = 1200\n" + 
+			"INFECTION_LEVEL = 3\n" + 
 			"ZOMBIE_AGGRO_RANGE = 80\n" + 
 			"SLOW_EFFECT_ZOMBIE_GRAB = 0\n" + 
 			"NAUSEA_EFFECT_ZOMBIE_GRAB = 0\n" + 
@@ -37,7 +39,9 @@ public class IOFileConfig {
 	private static Map<String, String> easySettings = new HashMap<String, String>(){
 		{
 			put("INFECTION_CHANCE_PERCENT",		 "85");
-			put("INFECTION_SPEED",				 "1");
+			put("INFECTION_SPEED",				 "20");
+			put("INFECTION_COUNTDOWN",			 "1200");
+			put("INFECTION_LEVEL",				 "3");
 			put("ZOMBIE_AGGRO_RANGE", 			 "80");
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "0");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "0");
@@ -58,7 +62,9 @@ public class IOFileConfig {
 	private static Map<String, String> mediumSettings = new HashMap<String, String>(){
 		{
 			put("INFECTION_CHANCE_PERCENT",		 "90");
-			put("INFECTION_SPEED",				 "2");
+			put("INFECTION_SPEED",				 "20");
+			put("INFECTION_COUNTDOWN",			 "900");
+			put("INFECTION_LEVEL",				 "3");
 			put("ZOMBIE_AGGRO_RANGE", 			 "100");
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "1");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "1");
@@ -79,7 +85,9 @@ public class IOFileConfig {
 	private static Map<String, String> hardSettings = new HashMap<String, String>(){
 		{
 			put("INFECTION_CHANCE_PERCENT",		 "100");
-			put("INFECTION_SPEED",				 "4");
+			put("INFECTION_SPEED",				 "20");
+			put("INFECTION_COUNTDOWN",			 "600");
+			put("INFECTION_LEVEL",				 "3");
 			put("ZOMBIE_AGGRO_RANGE", 			 "120");
 			put("SLOW_EFFECT_ZOMBIE_GRAB",		 "2");
 			put("NAUSEA_EFFECT_ZOMBIE_GRAB",	 "2");
