@@ -50,6 +50,9 @@ public class PlayerListener implements Listener {
 			pdm.saveOrUpdatePlayerDatabase(playerData);
 		} 
 
+		if(playerData.get_state().is_infected()) {
+			InfectedData.addInfectedPlayerToList(playerData);
+		}
 		StateScoreboard.initState(playerData);
 		pdm.closeSession();
 	}
@@ -62,6 +65,7 @@ public class PlayerListener implements Listener {
 		pdm.saveOrUpdatePlayerDatabase(playerData);
 		pdm.closeSession();
 		PersistData.removePersistantPlayer(player);
+		InfectedData.removeInfectedPlayerToList(playerData);
 	}
 	
 	

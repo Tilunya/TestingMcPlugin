@@ -11,3 +11,6 @@
       ZP_apocalypse:
          description: Set the difficulty of you apocalypse
          usage: /<command>
+      ZP_cure:
+         description: Remove player from infected list
+         usage: /<command>

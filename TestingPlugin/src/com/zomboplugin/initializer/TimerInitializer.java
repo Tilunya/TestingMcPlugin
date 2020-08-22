@@ -8,6 +8,7 @@ import com.zomboplugin.timer.LootboxLandingTimer;
 import com.zomboplugin.timer.PlayerNaturalLossTimer;
 import com.zomboplugin.timer.PlayerSleepTimer;
 import com.zomboplugin.timer.StatusChangePlayerTimer;
+import com.zomboplugin.timer.TimerInfection;
 
 public class TimerInitializer {
 	
@@ -18,11 +19,13 @@ public class TimerInitializer {
 	private static PlayerSleepTimer playerSleepTimer = new PlayerSleepTimer();
 	private static PlayerNaturalLossTimer playerNaturalLossTimer = new PlayerNaturalLossTimer();
 	private static LootboxLandingTimer lootboxLandingTimer = new LootboxLandingTimer();
+	private static TimerInfection sysInfectionTimer = new TimerInfection();
 	
 	public static void initializeTimers(JavaPlugin plugin) {
 		TimerInitializer.databaseBackupTimer.runTaskTimer(plugin, 600, 600);
 		TimerInitializer.playerSleepTimer.runTaskTimer(plugin, 200, 200);
 		TimerInitializer.lostStatusPlayerTimer.runTaskTimer(plugin, 400, 400);
+		TimerInitializer.sysInfectionTimer.runTaskTimer(plugin, 400, 400);
 		TimerInitializer.playerNaturalLossTimer.runTaskTimer(plugin, 600, 600);
 		TimerInitializer.lootboxLandingTimer.runTaskTimer(plugin, Long.parseLong(IOFileConfig.getConfigValue("LOOTBOX_SPAWN_TIME"))*minutesToTicks, 
 																Long.parseLong(IOFileConfig.getConfigValue("LOOTBOX_SPAWN_TIME"))*minutesToTicks);
@@ -34,6 +37,7 @@ public class TimerInitializer {
 		TimerInitializer.playerSleepTimer.cancel();
 		TimerInitializer.playerNaturalLossTimer.cancel();
 		TimerInitializer.lootboxLandingTimer.cancel();
+		TimerInitializer.sysInfectionTimer.cancel();
 	}
 
 }
