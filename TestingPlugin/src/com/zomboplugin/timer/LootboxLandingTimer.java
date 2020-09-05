@@ -47,8 +47,8 @@ public class LootboxLandingTimer extends BukkitRunnable {
 		for (StorageMinecart cart : le) {
 			cart.setCustomName(cart.getName());
 			Inventory cartInv = cart.getInventory();
-			for(Entry<String, String> entry : LootboxConfig.defaultLootSettings.entrySet()) {
-				cartInv.addItem(new ItemStack(Material.getMaterial(entry.getKey()), Integer.parseInt(entry.getValue())));
+			for(Entry<Object, Object> entry : LootboxConfig.getLootboxContaint().entrySet()) {
+				cartInv.addItem(new ItemStack(Material.getMaterial(entry.getKey().toString()), Integer.parseInt(entry.getValue().toString())));
 		    }
 		}
 	}

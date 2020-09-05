@@ -3,6 +3,7 @@ package com.zomboplugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.zomboplugin.config.IOFileConfig;
+import com.zomboplugin.config.LootboxConfig;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.database.ConfigDatabase;
 import com.zomboplugin.initializer.CommandsInitializer;
@@ -16,6 +17,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		IOFileConfig.manageConfigurationFiles();
+		LootboxConfig.manageLootFiles();
 
 		CommandsInitializer.InitializeCommands(this);
 		

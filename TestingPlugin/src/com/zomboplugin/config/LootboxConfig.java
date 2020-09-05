@@ -3,7 +3,6 @@ package com.zomboplugin.config;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class LootboxConfig {
+public class LootboxConfig extends UtilsConfig{
 /* *
  * ATTRIBUTS
  * */
@@ -84,16 +83,26 @@ public class LootboxConfig {
 
 	public static void manageLootFiles() {
 		File directory = new File(pluginFolder + configurationFolderPath);
-		File configFile = new File(pluginFolder + configurationFolderPath + configurationFilePath);
+		File configFile = new File(getFilePath());
 		if(!directory.exists()) {
 			directory.mkdir();
 		}
 		writeFile(configFile, defaultLootFile);
 	}
 
+	public static Properties getLootboxContaint() {
+		Properties prop = new Properties();
+		try(InputStream input = new FileInputStream(getFilePath())){
+			prop.load(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return prop;
+	}
+	
 	public static String getLootValue(String key) {
 		String value = "";
-		try(InputStream input = new FileInputStream(pluginFolder + configurationFolderPath + configurationFilePath)){
+		try(InputStream input = new FileInputStream(getFilePath())){
 			Properties prop = new Properties();
 			prop.load(input);
 			value = prop.getProperty(key);
@@ -104,32 +113,23 @@ public class LootboxConfig {
 	}
 
 	public static void restoreDefaultLootSettings() {
-		setLootSettings(defaultLootSettings);
+		setLootSettings(defaultLootSettings, getFilePath());
 	}
 
+	public static String getFilePath() {
+		return pluginFolder + configurationFolderPath + configurationFilePath;
+	}
 /* *
  * PRIVATE METHODS
  * */
 
-	private static void setLootSettings(Map<String, String> LootSettings) {
-		try(OutputStream output = new FileOutputStream(pluginFolder + configurationFolderPath + configurationFilePath)){
+	private static void setLootSettings(Map<String, String> settings, String filePath) {
+		try(OutputStream output = new FileOutputStream(filePath)){
 			Properties prop = new Properties();
-			for (Map.Entry<String, String> entry : LootSettings.entrySet()) {
+			for (Map.Entry<String, String> entry : settings.entrySet()) {
 				prop.setProperty(entry.getKey(), entry.getValue());
 			}
 			prop.store(output, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void writeFile(File configFile, String text) {
-		try {
-			if(configFile.createNewFile()) {
-				FileWriter myWriter = new FileWriter(configFile);
-				myWriter.write(text);
-				myWriter.close();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
