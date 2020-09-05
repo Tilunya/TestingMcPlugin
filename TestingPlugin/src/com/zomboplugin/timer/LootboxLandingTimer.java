@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -23,6 +24,7 @@ public class LootboxLandingTimer extends BukkitRunnable {
 
 	private static World activeWorld;
 	private static String radioMessage = "";
+	private final static int lootnumber = 3;
 
 	@Override
 	public void run() {
@@ -34,10 +36,14 @@ public class LootboxLandingTimer extends BukkitRunnable {
 		}
 
 		List<StorageMinecart> le = new ArrayList<>();
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < lootnumber; i++) {
 			LootboxData lbd = new LootboxData(activeWorld);
 			radioMessage += lbd.getCoordinates().toString() + " ";
 			le.add((StorageMinecart) activeWorld.spawnEntity(lbd.getCoordinates(), EntityType.MINECART_CHEST));
+			Location loc = new Location(activeWorld, lbd.getCoordinates().getX(), activeWorld.getHighestBlockAt((int) lbd.getCoordinates().getX(), (int) lbd.getCoordinates().getZ()).getY(), lbd.getCoordinates().getZ());
+			for(int j = 0; j < lootnumber; j++) {
+				activeWorld.spawnEntity(loc, EntityType.ZOMBIE);
+			}
 		}
 		
 		for(Player p : activeWorld.getPlayers()) {
