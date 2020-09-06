@@ -11,3 +11,6 @@
       ZP_apocalypse:
          description: Set the difficulty of you apocalypse
          usage: /<command>
+      ZP_safezone_add:
+         description: Add new safezone on your current location, need radius to be specified
+         usage: /<command>
