@@ -40,7 +40,7 @@ public class LootboxLandingTimer extends BukkitRunnable {
 			LootboxData lbd = new LootboxData(activeWorld);
 			radioMessage += lbd.getCoordinates().toString() + " ";
 			le.add((StorageMinecart) activeWorld.spawnEntity(lbd.getCoordinates(), EntityType.MINECART_CHEST));
-			Location loc = new Location(activeWorld, lbd.getCoordinates().getX(), activeWorld.getHighestBlockAt((int) lbd.getCoordinates().getX(), (int) lbd.getCoordinates().getZ()).getY(), lbd.getCoordinates().getZ());
+			Location loc = new Location(activeWorld, lbd.getCoordinates().getX(), activeWorld.getHighestBlockAt((int) lbd.getCoordinates().getX(), (int) lbd.getCoordinates().getZ()).getY() + 2, lbd.getCoordinates().getZ());
 			for(int j = 0; j < lootnumber; j++) {
 				activeWorld.spawnEntity(loc, EntityType.ZOMBIE);
 			}
