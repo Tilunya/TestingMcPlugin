@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import com.zomboplugin.data.SafezoneData;
 import com.zomboplugin.listener.event.WorldEvent;
 import com.zomboplugin.listener.event.ZombieEvent;
 import com.zomboplugin.util.ZombieEnumUtil;
@@ -14,6 +15,9 @@ public class ZombieListener implements Listener {
 	
 	@EventHandler
 	public void onCreatureSpawn(CreatureSpawnEvent creature) {
+		if(SafezoneData.isLocationInsideSafezone(creature.getEntity().getLocation())) {
+			creature.setCancelled(true);
+		}
 	}
 	
 	@EventHandler

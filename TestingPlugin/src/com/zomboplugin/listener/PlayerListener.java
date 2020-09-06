@@ -28,6 +28,7 @@ import org.bukkit.potion.PotionType;
 import com.zomboplugin.config.IOFileConfig;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
+import com.zomboplugin.data.SafezoneData;
 import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
 import com.zomboplugin.listener.event.PlayerEvent;
 import com.zomboplugin.scoreboard.StateScoreboard;
@@ -152,6 +153,11 @@ public class PlayerListener implements Listener {
 		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || 
 				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("HIT_LIMIT"))){
 			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
+		}
+		if(entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) && entityHit.getDamager() instanceof Player) {
+			if(SafezoneData.isLocationInsideSafezone(entityHit.getEntity().getLocation())) {
+				entityHit.setCancelled(true);
+			}
 		}
 	}
 	
