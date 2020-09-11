@@ -4,6 +4,7 @@ import org.bukkit.Location;
 
 public class SafezoneData {
 
+	private static String safezoneName = "";
 	private static Location safeZoneLocation = null;
 	private static double safeZoneRadius = 0;
 	private Boolean isPvpDisabled = true;
@@ -20,6 +21,14 @@ public class SafezoneData {
 		double squareRadius = safeZoneRadius * safeZoneRadius;
 		
 		return ((squareX + squareY) < squareRadius);
+	}
+
+	public static String getSafezoneName() {
+		return safezoneName;
+	}
+
+	public static void setSafezoneName(String pSafezoneName) {
+		safezoneName = pSafezoneName;
 	}
 
 	public Location getSafezoneLocation() {
