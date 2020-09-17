@@ -7,8 +7,8 @@ public class SafezoneData {
 	private static String safezoneName = "";
 	private static Location safeZoneLocation = null;
 	private static double safeZoneRadius = 0;
-	private Boolean isPvpDisabled = true;
-	private Boolean isMobSpawnDisabled = true;
+	private static Boolean isPvpDisabled = true;
+	private static Boolean isMobSpawnDisabled = true;
 
 	public SafezoneData(Location pLocation, double pRadius) {
 		safeZoneLocation = pLocation;
@@ -21,6 +21,10 @@ public class SafezoneData {
 		double squareRadius = safeZoneRadius * safeZoneRadius;
 		
 		return ((squareX + squareY) < squareRadius);
+	}
+	
+	public static String getAllDataFromSafezone() {
+		return safeZoneLocation.toString() + String.valueOf(safeZoneRadius) + isPvpDisabled.toString() + isMobSpawnDisabled.toString();
 	}
 
 	public static String getSafezoneName() {

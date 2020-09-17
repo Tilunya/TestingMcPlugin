@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class IOFileConfig {
+public class IOFileConfig extends UtilsConfig {
 /* *
  * ATTRIBUTS
  * */
@@ -166,24 +166,6 @@ public class IOFileConfig {
 				prop.setProperty(entry.getKey(), entry.getValue());
 			}
 			prop.store(output, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Default write file needed to create the file in first hand, with carriage return.
-	 * @param configFile : path of the config file to be written.
-	 * @param text : containt of the config file.
-	 * @author Fabibulabix
-	 */
-	private static void writeFile(File configFile, String text) {
-		try {
-			if(configFile.createNewFile()) {
-				FileWriter myWriter = new FileWriter(configFile);
-				myWriter.write(text);
-				myWriter.close();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
