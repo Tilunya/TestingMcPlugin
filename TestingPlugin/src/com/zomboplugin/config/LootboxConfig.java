@@ -119,6 +119,7 @@ public class LootboxConfig extends UtilsConfig{
 	public static String getFilePath() {
 		return pluginFolder + configurationFolderPath + configurationFilePath;
 	}
+
 /* *
  * PRIVATE METHODS
  * */
