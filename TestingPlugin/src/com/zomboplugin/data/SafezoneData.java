@@ -2,6 +2,8 @@ package com.zomboplugin.data;
 
 import org.bukkit.Location;
 
+import com.zomboplugin.config.SafezoneConfig;
+
 public class SafezoneData {
 
 	private static String safezoneName = "";
@@ -10,28 +12,34 @@ public class SafezoneData {
 	private static Boolean isPvpDisabled = true;
 	private static Boolean isMobSpawnDisabled = true;
 
-	public SafezoneData(Location pLocation, double pRadius) {
+	//Use that default constructor only for SafezoneConfig class if possible
+	public SafezoneData() {}
+	
+	//Use that constructor for in game safezone management
+	public SafezoneData(Location pLocation, double pRadius, String pName) {
 		safeZoneLocation = pLocation;
 		safeZoneRadius = pRadius;
+		safezoneName = pName;
 	}
 
-	public static Boolean isLocationInsideSafezone(Location pLocation) {
-		double squareX = (pLocation.getX() - safeZoneLocation.getX()) * (pLocation.getX() - safeZoneLocation.getX());
-		double squareY = (pLocation.getZ() - safeZoneLocation.getZ()) * (pLocation.getZ() - safeZoneLocation.getZ());
-		double squareRadius = safeZoneRadius * safeZoneRadius;
+	public static Boolean isLocationInsideSafezone(Location pLocation, String safezoneName) {
+		double squareX = (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(safezoneName).getX()) * (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(safezoneName).getX());
+		double squareY = (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ()) * (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ());
+		double squareRadius = SafezoneConfig.getSafeZoneRadiusFromSafezone(safezoneName) * SafezoneConfig.getSafeZoneRadiusFromSafezone(safezoneName);
 		
 		return ((squareX + squareY) < squareRadius);
 	}
 	
-	public static String getAllDataFromSafezone() {
-		return safeZoneLocation.toString() + String.valueOf(safeZoneRadius) + isPvpDisabled.toString() + isMobSpawnDisabled.toString();
+	public String getAllDataFromSafezone() {
+		return String.valueOf(safeZoneLocation.getWorld() + ";" + safeZoneLocation.getX()) + ";" + String.valueOf(safeZoneLocation.getY()) + ";" + String.valueOf(safeZoneLocation.getZ())
+										   + ";" + String.valueOf(safeZoneRadius) + ";" + isPvpDisabled.toString() + ";" + isMobSpawnDisabled.toString();
 	}
 
-	public static String getSafezoneName() {
+	public String getSafezoneName() {
 		return safezoneName;
 	}
 
-	public static void setSafezoneName(String pSafezoneName) {
+	public void setSafezoneName(String pSafezoneName) {
 		safezoneName = pSafezoneName;
 	}
 
