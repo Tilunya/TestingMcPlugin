@@ -15,7 +15,9 @@ public class SafezoneCommand implements CommandExecutor {
 			if(sender instanceof Player) {
 				Player player = (Player) sender;
 				player.sendMessage("Setting safezone...");
+				player.sendMessage(player.getLocation().toString() + Double.parseDouble(args[0]) + args[1].toString());
 				SafezoneData szd = new SafezoneData(player.getLocation(), Double.parseDouble(args[0]), args[1]);
+				player.sendMessage(szd.toString());
 				player.sendMessage("Safezone has been placed");
 			}
 		}else {
