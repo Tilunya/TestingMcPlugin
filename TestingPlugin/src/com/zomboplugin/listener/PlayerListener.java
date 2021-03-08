@@ -155,7 +155,7 @@ public class PlayerListener implements Listener {
 			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
 		}
 		if(entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) && entityHit.getDamager() instanceof Player) {
-			if(SafezoneData.isLocationInsideSafezone(entityHit.getEntity().getLocation())) {
+			if(SafezoneData.isLocationInsideSafezone(entityHit.getEntity().getLocation(), "")) {
 				entityHit.setCancelled(true);
 			}
 		}

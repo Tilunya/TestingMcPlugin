@@ -33,8 +33,7 @@ public class SafezoneConfig extends UtilsConfig {
 
 		try {
 			reader = new BufferedReader(new FileReader(filePath!=null?filePath:defaultFilePath));
-			while ((line = reader.readLine()) != null)
-			{
+			while ((line = reader.readLine()) != null) {
 			    String[] parts = line.split("=");
 		        String key = parts[0];
 		        String value = parts[1];
@@ -42,8 +41,7 @@ public class SafezoneConfig extends UtilsConfig {
 			}
 
 			//showing result into console
-		    for (String key : szdm.keySet())
-		    {
+		    for (String key : szdm.keySet()) {
 		        System.out.println(key + " = " + szdm.get(key));
 		    }
 

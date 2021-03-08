@@ -1,5 +1,7 @@
 package com.zomboplugin.data;
 
+import java.util.Map.Entry;
+
 import org.bukkit.Location;
 
 import com.zomboplugin.config.SafezoneConfig;
@@ -23,11 +25,29 @@ public class SafezoneData {
 	}
 
 	public static Boolean isLocationInsideSafezone(Location pLocation, String safezoneName) {
+		if(safezoneName == "") {
+			boolean isPlayerInsideSafezone = false;
+			double anonymousSquareX;
+			double anonymousSquareZ;
+			double anonymousSquareRadius;
+
+			for (Entry<String, String> entry : SafezoneConfig.safezonesMap.entrySet()) {
+				String entryKey = entry.getKey();
+				anonymousSquareX = (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(entryKey).getX()) * (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(entryKey).getX());
+				anonymousSquareZ = (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(entryKey).getZ()) * (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(entryKey).getZ());
+				anonymousSquareRadius = SafezoneConfig.getSafeZoneRadiusFromSafezone(entryKey) * SafezoneConfig.getSafeZoneRadiusFromSafezone(entryKey);
+
+				isPlayerInsideSafezone |= ((anonymousSquareX + anonymousSquareZ) < anonymousSquareRadius);
+			}
+
+			return isPlayerInsideSafezone;
+		}
+
 		double squareX = (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(safezoneName).getX()) * (pLocation.getX() - SafezoneConfig.getLocationFromSafezone(safezoneName).getX());
-		double squareY = (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ()) * (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ());
+		double squareZ = (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ()) * (pLocation.getZ() - SafezoneConfig.getLocationFromSafezone(safezoneName).getZ());
 		double squareRadius = SafezoneConfig.getSafeZoneRadiusFromSafezone(safezoneName) * SafezoneConfig.getSafeZoneRadiusFromSafezone(safezoneName);
-		
-		return ((squareX + squareY) < squareRadius);
+
+		return ((squareX + squareZ) < squareRadius);
 	}
 	
 	public String getAllDataFromSafezone() {
