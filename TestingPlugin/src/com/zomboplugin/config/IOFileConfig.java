@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class IOFileConfig {
+public class IOFileConfig extends UtilsConfig {
 /* *
  * ATTRIBUTS
  * */
@@ -31,8 +31,10 @@ public class IOFileConfig {
 			"DEHYDRATION_SPEED = 0\n" + 
 			"WITHER_EFFECT_DEHYDRATION = 0\n" + 
 			"NAUSEA_DEHYDRATION = 0\n" +
-			"CHEST_REFILL_TIME = 24000\n" + 
-			"LOOTBOX_FALL_TIME = 24000";
+			"LOOTBOX_SPAWN_TIME = 15\n" +
+			"LOOTBOX_FALL_TIME = 5\n" +
+			"MAP_X_LENGTH = 20\n" +
+			"MAP_Z_LENGTH = 20";
 	
 	private static Map<String, String> easySettings = new HashMap<String, String>(){
 		{
@@ -49,9 +51,10 @@ public class IOFileConfig {
 			put("DEHYDRATION_SPEED",			 "0");
 			put("WITHER_EFFECT_DEHYDRATION",	 "0");
 			put("NAUSEA_DEHYDRATION",			 "0");
-			put("CHEST_REFILL_TIME",			 "0");
-			put("CHEST_REFILL_TIME",			 "24000");
-			put("LOOTBOX_FALL_TIME",			 "24000");
+			put("LOOTBOX_SPAWN_TIME",			 "15");
+			put("LOOTBOX_FALL_TIME",			 "5");
+			put("MAP_X_LENGTH",					 "20");
+			put("MAP_Z_LENGTH",					 "20");
 		}
 	};
 	
@@ -70,9 +73,10 @@ public class IOFileConfig {
 			put("DEHYDRATION_SPEED",			 "2");
 			put("WITHER_EFFECT_DEHYDRATION",	 "1");
 			put("NAUSEA_DEHYDRATION",			 "1");
-			put("CHEST_REFILL_TIME",			 "1");
-			put("CHEST_REFILL_TIME",			 "48000");
-			put("LOOTBOX_FALL_TIME",			 "48000");
+			put("LOOTBOX_SPAWN_TIME",			 "15");
+			put("LOOTBOX_FALL_TIME",			 "5");
+			put("MAP_X_LENGTH",					 "20");
+			put("MAP_Z_LENGTH",					 "20");
 		}
 	};
 	
@@ -91,9 +95,10 @@ public class IOFileConfig {
 			put("DEHYDRATION_SPEED",			 "2");
 			put("WITHER_EFFECT_DEHYDRATION",	 "2");
 			put("NAUSEA_DEHYDRATION",			 "2");
-			put("CHEST_REFILL_TIME",			 "2");
-			put("CHEST_REFILL_TIME",			 "96000");
-			put("LOOTBOX_FALL_TIME",			 "96000");
+			put("LOOTBOX_SPAWN_TIME",			 "15");
+			put("LOOTBOX_FALL_TIME",			 "5");
+			put("MAP_X_LENGTH",					 "20");
+			put("MAP_Z_LENGTH",					 "20");
 		}
 	};
 
@@ -166,24 +171,6 @@ public class IOFileConfig {
 				prop.setProperty(entry.getKey(), entry.getValue());
 			}
 			prop.store(output, null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Default write file needed to create the file in first hand, with carriage return.
-	 * @param configFile : path of the config file to be written.
-	 * @param text : containt of the config file.
-	 * @author Fabibulabix
-	 */
-	private static void writeFile(File configFile, String text) {
-		try {
-			if(configFile.createNewFile()) {
-				FileWriter myWriter = new FileWriter(configFile);
-				myWriter.write(text);
-				myWriter.close();
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
