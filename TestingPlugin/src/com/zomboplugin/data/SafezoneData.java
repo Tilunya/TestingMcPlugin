@@ -16,7 +16,7 @@ public class SafezoneData {
 
 	//Use that default constructor only for SafezoneConfig class if possible
 	public SafezoneData() {}
-	
+
 	//Use that constructor for in game safezone management
 	public SafezoneData(Location pLocation, double pRadius, String pName) {
 		safeZoneLocation = pLocation;
@@ -25,7 +25,7 @@ public class SafezoneData {
 	}
 
 	public static Boolean isLocationInsideSafezone(Location pLocation, String safezoneName) {
-		if(safezoneName == "") {
+		if(safezoneName.isEmpty()) {
 			boolean isPlayerInsideSafezone = false;
 			double anonymousSquareX;
 			double anonymousSquareZ;
@@ -49,7 +49,7 @@ public class SafezoneData {
 
 		return ((squareX + squareZ) < squareRadius);
 	}
-	
+
 	public String getAllDataFromSafezone() {
 		return String.valueOf(safeZoneLocation.getWorld() + ";" + safeZoneLocation.getX()) + ";" + String.valueOf(safeZoneLocation.getY()) + ";" + String.valueOf(safeZoneLocation.getZ())
 										   + ";" + String.valueOf(safeZoneRadius) + ";" + isPvpDisabled.toString() + ";" + isMobSpawnDisabled.toString();

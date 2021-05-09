@@ -1,7 +1,5 @@
 package com.zomboplugin.listener;
 
-import java.util.Iterator;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -154,7 +152,10 @@ public class PlayerListener implements Listener {
 				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("HIT_LIMIT"))){
 			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
 		}
-		if(entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) && entityHit.getDamager() instanceof Player) {
+		System.out.println("entityHit = " + entityHit.toString());
+		System.out.println("entityHit.getDamager() = " + entityHit.getDamager().toString());
+		System.out.println("entityHit.getEntity() = " + entityHit.getEntity().toString());
+		if(entityHit.getEntity() instanceof Player && entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) && entityHit.getDamager() instanceof Player) {
 			if(SafezoneData.isLocationInsideSafezone(entityHit.getEntity().getLocation(), "")) {
 				entityHit.setCancelled(true);
 			}

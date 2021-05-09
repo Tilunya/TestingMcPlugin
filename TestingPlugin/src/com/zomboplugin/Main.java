@@ -1,11 +1,9 @@
 package com.zomboplugin;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.zomboplugin.command.ApocalypseDifficultyCommand;
-import com.zomboplugin.command.KitCommand;
 import com.zomboplugin.config.IOFileConfig;
+import com.zomboplugin.config.SafezoneConfig;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.database.ConfigDatabase;
 import com.zomboplugin.initializer.CommandsInitializer;
@@ -20,10 +18,10 @@ public class Main extends JavaPlugin {
 		IOFileConfig.manageConfigurationFiles();
 
 		CommandsInitializer.InitializeCommands(this);
-		
 		ConfigDatabase.createNewDatabase("main.db");
-
+		SafezoneConfig.initializeSafezoneList();
 		ListenersInitializer.init(this);
+
 		TimerInitializer.initializeTimers(this);
 	}
 

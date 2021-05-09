@@ -2,7 +2,6 @@ package com.zomboplugin.config;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,9 +20,9 @@ public class SafezoneConfig extends UtilsConfig {
 	public static void writeSafezoneFile (String filePath) {
 		String textToWrite = "";
 		for (Map.Entry<String, String> entry : safezonesMap.entrySet()) {
-			textToWrite += entry.getKey() + " = " + entry.getValue() + "\n";
+			textToWrite += entry.getKey() + " : " + entry.getValue() + "\n";
 		}
-		SafezoneConfig.writeFile(new File(filePath), textToWrite);
+		writeFile(new File(filePath), textToWrite);
 	}
 
 	public static Map<String, String> readSafezoneFile(String filePath) {
@@ -34,8 +33,10 @@ public class SafezoneConfig extends UtilsConfig {
 		try {
 			reader = new BufferedReader(new FileReader(filePath!=null?filePath:defaultFilePath));
 			while ((line = reader.readLine()) != null) {
-			    String[] parts = line.split("=");
-		        String key = parts[0];
+				System.out.println("line = " + line.toString());
+			    String[] parts = line.split(":");
+		        String key = parts[0].trim();
+		        System.out.println("parts[1] = " + parts[1].toString());
 		        String value = parts[1];
 		        szdm.put(key, value);
 			}
@@ -52,6 +53,10 @@ public class SafezoneConfig extends UtilsConfig {
 		}
 		
 		return szdm;
+	}
+
+	public static void initializeSafezoneList() {
+		safezonesMap = readSafezoneFile(defaultFilePath);
 	}
 
 	public static void addSafezoneToList(SafezoneData safezone) {
@@ -78,11 +83,11 @@ public class SafezoneConfig extends UtilsConfig {
 		SafezoneData szd = new SafezoneData();
 		String[] datas = safezonesMap.get(keyName).split(";");
 
-		szd.setSafezoneName(datas[0]);
-		szd.setSafezoneLocation(new Location(Bukkit.getWorld(datas[1]), Double.parseDouble(datas[2]), Double.parseDouble(datas[3]), Double.parseDouble(datas[4])));
-		szd.setSafeZoneRadius(Double.parseDouble(datas[5]));
-		szd.setIsPvpDisabled(Boolean.parseBoolean(datas[6]));
-		szd.setIsMobSpawnDisabled(Boolean.parseBoolean(datas[7]));
+		szd.setSafezoneName(keyName);
+		szd.setSafezoneLocation(new Location(Bukkit.getWorld(datas[0]), Double.parseDouble(datas[1]), Double.parseDouble(datas[2]), Double.parseDouble(datas[3])));
+		szd.setSafeZoneRadius(Double.parseDouble(datas[4]));
+		szd.setIsPvpDisabled(Boolean.parseBoolean(datas[5]));
+		szd.setIsMobSpawnDisabled(Boolean.parseBoolean(datas[6]));
 
 		return szd;
 	}

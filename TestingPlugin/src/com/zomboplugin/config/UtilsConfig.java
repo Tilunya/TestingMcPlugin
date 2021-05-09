@@ -8,11 +8,12 @@ public class UtilsConfig {
 
 	protected static void writeFile(File file, String text) {
 		try {
-			if(file.createNewFile()) {
+			//I commented the condition so I can overwrite an existing file, idk yet of the impact on the other functionnalities
+			//if(file.createNewFile()) {
 				FileWriter myWriter = new FileWriter(file);
 				myWriter.write(text);
 				myWriter.close();
-			}
+			//}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

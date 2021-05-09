@@ -15,7 +15,8 @@ public class ZombieListener implements Listener {
 	
 	@EventHandler
 	public void onCreatureSpawn(CreatureSpawnEvent creature) {
-		if(SafezoneData.isLocationInsideSafezone(creature.getEntity().getLocation(), "")) {
+		boolean isInsideSafezone = SafezoneData.isLocationInsideSafezone(creature.getEntity().getLocation(), "");
+		if(isInsideSafezone) {
 			creature.setCancelled(true);
 		}
 	}
