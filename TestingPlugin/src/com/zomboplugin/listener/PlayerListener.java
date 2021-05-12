@@ -26,6 +26,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import com.zomboplugin.config.IOFileConfig;
+import com.zomboplugin.data.InfectedData;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
 import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
