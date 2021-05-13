@@ -160,7 +160,6 @@ public class HydExhChangeListener implements Listener {
 		}
 		if(!isAffected) {
 			if(Double.compare(Math.random()*100.0,chance) <= 0 ) {
-				System.out.println("Success");
 				playerData.get_player().addPotionEffect(newPotionEffect);
 			}
 		}
