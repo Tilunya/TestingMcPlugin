@@ -16,10 +16,7 @@ public class CureDesease implements CommandExecutor {
 		if(args != null) {
 			sender.sendMessage(args[0].toString());
 			PlayerData p = PersistData.getPlayerData((Player) sender);
-			InfectedData.removeInfectedPlayerToList(p);
-			PersistData.getPlayerData(p.get_player()).get_state().set_infected(false);
-			InfectedData.resetInfectionCountdown(p);
-			InfectedData.resetInfectionLevel(p);
+			InfectedData.removeInfection(p);
 			sender.sendMessage("Player got removed from infected list.");
 		}else {
 			sender.sendMessage("Error happen when the player was removed from the infected list.");

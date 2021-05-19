@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -198,5 +199,31 @@ public class PlayerListener implements Listener {
 			playerData.refreshSpeed();
 			playerData.get_player().removePotionEffect(PotionEffectType.BLINDNESS);
 		}
+	}
+
+	/**
+	 * Event when the player consume an item
+	 * Manage healing of the infection by detecting if the player consume a weakness potion and a golden apple.
+	 * @param e
+	 */
+	@EventHandler
+	public void onItemConsume (PlayerItemConsumeEvent e) {
+	    ItemStack consumed = e.getItem();
+	    Player player = e.getPlayer();
+
+	    if(Material.POTION.equals(consumed)) {
+	    	PotionMeta pm = ((PotionMeta) consumed.getItemMeta());
+	    	if(pm.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
+	    		InfectedData.isPlayerCanBeHealed = true;
+	    	}
+		    System.out.println("InfectedData.isPlayerCanBeHealed" + InfectedData.isPlayerCanBeHealed );
+	    }
+	    else if(Material.GOLDEN_APPLE.equals(consumed)) {
+	    	if (InfectedData.isPlayerCanBeHealed) {
+	    		InfectedData.removeInfection(PersistData.getPlayerData(player));
+	    	}
+	    }
+	    player.sendMessage("OnItemConsume happened");
+	    System.out.println("OnItemConsume happened");
 	}
 }

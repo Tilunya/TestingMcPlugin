@@ -6,6 +6,7 @@ import com.zomboplugin.config.IOFileConfig;
 
 public class InfectedData {
 	
+	public static boolean isPlayerCanBeHealed = false;
 	public static ArrayList<PlayerData> infectedPlayersList = new ArrayList<PlayerData>();
 
 	@SuppressWarnings("unlikely-arg-type")
@@ -31,4 +32,13 @@ public class InfectedData {
 		p.get_state().set_infectionCountdown(Integer.parseInt(IOFileConfig.getConfigValue("INFECTION_LEVEL")));
 	}
 
+	public static void removeInfection(PlayerData p) {
+		removeInfectedPlayerToList(p);
+		PersistData.getPlayerData(p.get_player()).get_state().set_infected(false);
+		resetInfectionCountdown(p);
+		resetInfectionLevel(p);
+		isPlayerCanBeHealed = false;
+		p.get_player().sendMessage("You've healed from the infection");
+		System.out.println("OnItemConsume happened");
+	}
 }
