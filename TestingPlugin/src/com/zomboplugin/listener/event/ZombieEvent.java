@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import com.zomboplugin.config.IOFileConfig;
-import com.zomboplugin.data.InfectedData;
+import com.zomboplugin.data.InfectionData;
 import com.zomboplugin.data.PersistData;
 
 public class ZombieEvent {
@@ -33,7 +33,7 @@ public class ZombieEvent {
 				PersistData.getPlayerData((Player) player).get_state().set_infected(true);
 				player.sendMessage(IOFileConfig.getConfigValue("INFECTION_COUNTDOWN"));
 				PersistData.getPlayerData((Player) player).get_state().set_infectionCountdown(Integer.parseInt(IOFileConfig.getConfigValue("INFECTION_COUNTDOWN")));
-				InfectedData.addInfectedPlayerToList(PersistData.getPlayerData((Player) player));
+				InfectionData.addInfectedPlayerToList(PersistData.getPlayerData((Player) player));
 			}
 		}
 	}

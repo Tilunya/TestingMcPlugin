@@ -27,7 +27,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import com.zomboplugin.config.IOFileConfig;
-import com.zomboplugin.data.InfectedData;
+import com.zomboplugin.data.InfectionData;
 import com.zomboplugin.data.PersistData;
 import com.zomboplugin.data.PlayerData;
 import com.zomboplugin.data.database.manager.PlayerDatabaseManager;
@@ -53,7 +53,7 @@ public class PlayerListener implements Listener {
 		} 
 
 		if(playerData.get_state().is_infected()) {
-			InfectedData.addInfectedPlayerToList(playerData);
+			InfectionData.addInfectedPlayerToList(playerData);
 		}
 		StateScoreboard.initState(playerData);
 		pdm.closeSession();
@@ -67,7 +67,7 @@ public class PlayerListener implements Listener {
 		pdm.saveOrUpdatePlayerDatabase(playerData);
 		pdm.closeSession();
 		PersistData.removePersistantPlayer(player);
-		InfectedData.removeInfectedPlayerToList(playerData);
+		InfectionData.removeInfectedPlayerToList(playerData);
 	}
 	
 	
@@ -214,13 +214,13 @@ public class PlayerListener implements Listener {
 	    if(Material.POTION.equals(consumed)) {
 	    	PotionMeta pm = ((PotionMeta) consumed.getItemMeta());
 	    	if(pm.getBasePotionData().getType().equals(PotionType.WEAKNESS)) {
-	    		InfectedData.isPlayerCanBeHealed = true;
+	    		InfectionData.isPlayerCanBeHealed = true;
 	    	}
-		    System.out.println("InfectedData.isPlayerCanBeHealed" + InfectedData.isPlayerCanBeHealed );
+		    System.out.println("InfectionData.isPlayerCanBeHealed" + InfectionData.isPlayerCanBeHealed );
 	    }
 	    else if(Material.GOLDEN_APPLE.equals(consumed)) {
-	    	if (InfectedData.isPlayerCanBeHealed) {
-	    		InfectedData.removeInfection(PersistData.getPlayerData(player));
+	    	if (InfectionData.isPlayerCanBeHealed) {
+	    		InfectionData.removeInfection(PersistData.getPlayerData(player));
 	    	}
 	    }
 	    player.sendMessage("OnItemConsume happened");
