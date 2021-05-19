@@ -17,6 +17,8 @@ public class StatePlayerData {
 	private boolean _sleep;
 	private int _hydrationLevel;
 	private int _tirednessLevel;
+	private int _infectionCountdown;
+	private int _infectionLevel;
 	
 	private float _bonusSpeedExhaution = 1.0f;
 	private float _bonusSpeedHydration = 1.0f;
@@ -52,6 +54,12 @@ public class StatePlayerData {
 	public float get_bonusSpeedHydration() {
 		return _bonusSpeedHydration;
 	}
+	public int get_infectionCountdown() {
+		return _infectionCountdown;
+	}
+	public int get_infectionLevel() {
+		return _infectionLevel;
+	}
 	
 	
 	
@@ -85,6 +93,12 @@ public class StatePlayerData {
 	}
 	public void set_bonusSpeedHydration(float _bonusSpeedHydration) {
 		this._bonusSpeedHydration = _bonusSpeedHydration;
+	}
+	public void set_infectionCountdown(int _infectionCountdown) {
+		this._infectionCountdown = _infectionCountdown;
+	}
+	public void set_infectionLevel(int _infectionLevel) {
+		this._infectionLevel = _infectionLevel;
 	}
 	
 	
