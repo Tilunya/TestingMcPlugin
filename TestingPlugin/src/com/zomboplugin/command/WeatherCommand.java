@@ -15,6 +15,7 @@ public class WeatherCommand implements CommandExecutor {
 		WeatherListener.canChangeWeather = true;
 		List<World> worlds = sender.getServer().getWorlds();
 		if(args != null) {
+		System.out.println(args.toString());
 			switch(args[1].toString().toUpperCase()) {
 				case "RAIN" :
 					for(World world : worlds) {
