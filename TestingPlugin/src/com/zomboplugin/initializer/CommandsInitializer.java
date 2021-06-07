@@ -15,20 +15,21 @@ public class CommandsInitializer {
 		else {
 			System.err.println("Error on setting kitDiamond");
 		}
-		
+
 		if(plugin.getCommand("ZP_apocalypse") != null) {
 			plugin.getCommand("ZP_apocalypse").setExecutor(new ApocalypseDifficultyCommand());
 		}
 		else {
 			System.err.println("Error on setting apocalypse difficulty");
 		}
+
 		if(plugin.getCommand("ZP_weather") != null) {
-			plugin.getCommand("ZP_apocalypse").setExecutor(new WeatherCommand());
+			plugin.getCommand("ZP_weather").setExecutor(new WeatherCommand());
 		}
 		else {
 			System.err.println("Error on setting apocalypse weather");
 		}
-		
+
 //		if(plugin.getCommand("ZP_DataDeletePlayer") != null) { // Non pertinent
 //			plugin.getCommand("ZP_DataDeletePlayer").setExecutor(new ApocalypseDifficultyCommand());
 //		}
