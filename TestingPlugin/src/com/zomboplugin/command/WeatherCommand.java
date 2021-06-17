@@ -20,22 +20,29 @@ public class WeatherCommand implements CommandExecutor {
 				case "RAIN" :
 					for(World world : worlds) {
 						world.setStorm(true);
+						if(Boolean.parseBoolean(args[1])) world.setWeatherDuration(Integer.MAX_VALUE);
 					}
 					break;
 				case "THUNDER" :
 					for(World world : worlds) {
+						world.setStorm(true);
+						world.setWeatherDuration(Integer.MAX_VALUE);
+						WeatherListener.canChangeWeather = true;
 						world.setThundering(true);
+						world.setWeatherDuration(Integer.MAX_VALUE);
 					}
 					break;
 				case "SUN" :
 					for(World world : worlds) {
-						world.setStorm(false);
-						WeatherListener.canChangeWeather = true;
 						world.setThundering(false);
+						world.setWeatherDuration(Integer.MAX_VALUE);
+						WeatherListener.canChangeWeather = true;
+						world.setStorm(false);
+						world.setWeatherDuration(Integer.MAX_VALUE);
 					}
 					break;
 				default :
-					sender.sendMessage("You must write rain, thunder or sun to change weather with the command.");
+					sender.sendMessage("The weather you type is not a valid one. You must write /zp_weather <sun|rain|thunder> <true|false>");
 					break;
 			}
 		}

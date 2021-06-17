@@ -27,7 +27,7 @@ public class CommandsInitializer {
 			plugin.getCommand("ZP_weather").setExecutor(new WeatherCommand());
 		}
 		else {
-			System.err.println("Error on setting apocalypse weather");
+			System.err.println("Error on setting apocalypse weather. You must write /zp_weather <sun|rain|thunder> <true|false>");
 		}
 
 //		if(plugin.getCommand("ZP_DataDeletePlayer") != null) { // Non pertinent
