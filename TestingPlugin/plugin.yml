@@ -9,5 +9,8 @@
          description: Give 64 Diamonds
          usage: /<command>
       ZP_apocalypse:
-         description: Set the difficulty of you apocalypse
+         description: Set the difficulty of your apocalypse
+         usage: /<command>
+      ZP_weather:
+         description: Set the weather on your world
          usage: /<command>
