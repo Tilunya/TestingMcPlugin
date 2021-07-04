@@ -121,7 +121,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerFall(EntityDamageEvent entityDamaged) {
 		if(entityDamaged.getCause().equals(DamageCause.FALL) && entityDamaged.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("FALLING_LIMIT"))) {
-			PlayerEvent.brokenHarm((LivingEntity) entityDamaged.getEntity());
+			PlayerEvent.brokenLeg((LivingEntity) entityDamaged.getEntity());
 		}
 	}
 	
@@ -157,7 +157,7 @@ public class PlayerListener implements Listener {
 	public void onPlayerHit(EntityDamageByEntityEvent entityHit) {
 		if((entityHit.getCause().equals(DamageCause.ENTITY_ATTACK) || 
 				entityHit.getCause().equals(DamageCause.PROJECTILE)) && entityHit.getDamage() > Integer.parseInt(IOFileConfig.getConfigValue("HIT_LIMIT"))){
-			PlayerEvent.brokenLeg((LivingEntity) entityHit.getEntity());
+			PlayerEvent.brokenArm((LivingEntity) entityHit.getEntity());
 		}
 	}
 	
